@@ -213,12 +213,12 @@ void AppTaskCreate(void)
   ********************************************************************/
 void Led_Task(void* parameter)
 {	
-  	
+  KEY_FUN_CONFIRM_LED_SetLow();
   while (1)
   {
 	
 	Run_Display_Handler();
-    //vTaskDelay(100);   /* 延时500个tick */
+    vTaskDelay(20);   /* 延时500个tick */
   }
 }
 
@@ -237,7 +237,7 @@ void KEY_Task(void* parameter)
     tpd_t.read_key_value=KEY_Scan();
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
-    vTaskDelay(100);/* 延时20个tick */
+    vTaskDelay(50);/* 延时20个tick */
   }
 }
 

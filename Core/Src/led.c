@@ -71,9 +71,11 @@ void Led_Display_Content_Fun(uint8_t selitem)
    	 
 	 if(tpd_t.gTimer_select_fun < 6){
         Fan_Led_Flicker();
-		  
+     }
+     else{
+        FAN_LED_OFF();
 
-	 }
+     }
 
 
    break;
@@ -117,6 +119,10 @@ void Led_Display_Content_Fun(uint8_t selitem)
 	 if(tpd_t.gTimer_select_fun < 6){
    	    Tape_Led_Flicker();
 	 }
+     else{
+
+        TAPE_LED_OFF();
+     }
 
 	 
 
@@ -159,6 +165,11 @@ void Led_Display_Content_Fun(uint8_t selitem)
      //STERILIZATION
       if(tpd_t.gTimer_select_fun < 6){
    	     Sterilization_Led_Filcker();
+       }
+       else{
+
+            STERILIZATION_LED_OFF();
+
        }
 
 
@@ -211,6 +222,10 @@ void Led_Display_Content_Fun(uint8_t selitem)
 		   tpd_t.gTimer_keep_heat_fun=0;
 		
        	}
+        else{
+           KEEP_HEAT_LED_OFF();
+
+        }
        
 
       
@@ -435,19 +450,26 @@ void Key_Confirm_Handler(uint8_t selitem)
 
 	  	}
 
-   		if(tpd_t.confirm_key_select_item_sterilization == sterilization_enable ){
-         STERILIZATION_LED_ON();
-       }
-	   else
-	      STERILIZATION_LED_OFF();
-
+   		
+     if(tpd_t.confirm_key_select_item_sterilization == sterilization_enable ){
+            RELAY_C_SetHigh();
+            STERILIZATION_LED_ON();
+          }
+          else{
+             RELAY_C_SetLow();
+             STERILIZATION_LED_OFF();
+          }
+       
+       
+         if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+             RELAY_D_SetHigh();
+             KEEP_HEAT_LED_ON();
+           }
+          else{ 
+               RELAY_D_SetLow();
+               KEEP_HEAT_LED_OFF();
      
-	  if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
-		  KEEP_HEAT_LED_ON();
-	  	}
-	   else 
-	  		KEEP_HEAT_LED_OFF();
-
+              }
 	
 	 // select 
 	  fan_confirm_flag = fan_confirm_flag ^ 0x01;
@@ -479,17 +501,24 @@ void Key_Confirm_Handler(uint8_t selitem)
 	   }
 
 	    if(tpd_t.confirm_key_select_item_sterilization == sterilization_enable ){
+         RELAY_C_SetHigh();
          STERILIZATION_LED_ON();
        }
-	   else
+	   else{
+          RELAY_C_SetLow();
 	      STERILIZATION_LED_OFF();
+       }
 	
 	
 	  if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+          RELAY_D_SetHigh();
 		  KEEP_HEAT_LED_ON();
 	  	}
-	   else 
+	   else{ 
+            RELAY_D_SetLow();
 	  		KEEP_HEAT_LED_OFF();
+
+           }
 
 	 
 	  
@@ -535,10 +564,14 @@ void Key_Confirm_Handler(uint8_t selitem)
 	  }
 	 
 	   if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+          RELAY_D_SetHigh();;
 		  KEEP_HEAT_LED_ON();
 	  	}
-	   else 
+	   else{ 
+            RELAY_D_SetLow();
 	  		KEEP_HEAT_LED_OFF();
+
+           }
 	   
  
 	  
@@ -618,7 +651,7 @@ void Key_Confirm_Handler(uint8_t selitem)
 				tpd_t.confirm_key_select_item_keep_heat = confirm_disable;
 				KEEP_HEAT_LED_OFF();
 				ADD_DEC_LED_OFF();  
-			  //  KEY_FUN_CONFIRM_LED_SetLow() ;
+			    KEY_FUN_CONFIRM_LED_SetHigh() ;
 
 				tpd_t.keep_heat_fun_digital_numbers=0;
 
@@ -632,7 +665,7 @@ void Key_Confirm_Handler(uint8_t selitem)
 	  	      tpd_t.confirm_key_select_item_keep_heat = keep_heat_enable;
 	          KEEP_HEAT_LED_ON();
 			  ADD_DEC_LED_OFF();  
-			//  KEY_FUN_CONFIRM_LED_SetLow() ;
+			  KEY_FUN_CONFIRM_LED_SetHigh() ;
 
 
 	  break;
