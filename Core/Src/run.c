@@ -23,11 +23,12 @@ uint8_t led_on_of_number;
 void Run_InputKey_Model(uint8_t keyvalue)
 {
    
-	switch(tpd_t.read_key_value){
+    static uint8_t confirm_flag;
+    switch(tpd_t.read_key_value){
 			
 	
 
-		case KEY0_PRES:
+		case FUNCTION_PRES: //FUN
 
 	    if(tpd_t.keep_heat_fun_digital_numbers ==1){
               tpd_t.gTimer_keep_heat_fun=0;
@@ -49,7 +50,7 @@ void Run_InputKey_Model(uint8_t keyvalue)
 		}
 		break;
 	
-		case KEY1_PRES: //CONFIRM_KEY
+		case CONFIRM_PRES: //CONFIRM_KEY
 
 		if(tpd_t.keep_heat_fun_digital_numbers ==1){
               tpd_t.gTimer_keep_heat_fun=0;
@@ -58,14 +59,14 @@ void Run_InputKey_Model(uint8_t keyvalue)
 			  if(tpd_t.digital_numbers < 0)  tpd_t.digital_numbers=40; //scope : 0~80度=80;
 			  
 		}
-		else
-		    tpd_t.run_process_tag= KEY_CONFIRM_ITEM;
-	
-		
+		else{
+             
+		      tpd_t.run_process_tag= KEY_CONFIRM_ITEM;
+           }
 	
 		break;
 
-		case KEY_CONFIRM_MODE :
+		case KEY_CONFIRM_MODE : //long key 
 			tpd_t.keep_heat_fun_digital_numbers=0;
             tpd_t.keep_heat_run_flag=3;
 			Key_Confirm_Handler(KEEP_HEAT_LED);
@@ -96,11 +97,7 @@ void Run_BoardCommand_Handler(void)
 	 	
 	    Led_Display_Content_Fun(led_on_of_number);
 
-      
-
-	  
-
-	 break;
+     break;
 
 	 case KEY_CONFIRM_ITEM:
 
@@ -150,7 +147,7 @@ void Run_Display_Handler(void)
 
 	if(first_power_on==0){
 		first_power_on++;
-      KEY_FUN_CONFIRM_LED_SetLow();
+     // KEY_FUN_CONFIRM_LED_SetLow();
 
 	}
 

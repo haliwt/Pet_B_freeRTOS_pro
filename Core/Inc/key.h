@@ -22,23 +22,19 @@
 #define		_KEY_ALL_OFF				 0XFF
 
 //normal times be pressed key
-#define		_KEY_POWER     		0x01  //key power
-#define		_KEY_MODE     		0x02  //key mode
-#define		_KEY_DEC     			0x04  //key dec
-#define		_KEY_ADD     			0x08  //key add
+#define FUNCTION_PRES 	0x01
+#define CONFIRM_PRES	0x02
+
 
 
 
 //long times be pressed
-#define		_KEY_CONT_1_POWER     	     0x81    //??????--???
+#define	   _KEY_CONT_1_POWER     	     0x81    //??????--???
 #define	   KEY_CONFIRM_MODE   		     0x82    //??????--???
-#define		_KEY_CONT_3_DEC    	         0x84    //?????? ?????
-#define		_KEY_CONT_4_ADD     	     0x88    //??? --?????
 
-#define KEY0_PRES 	0x01
-#define KEY1_PRES	0x02
-#define KEY2_PRES	0x04
-#define WKUP_PRES   0x08
+
+
+
 
 
 
@@ -47,8 +43,8 @@
 
 typedef enum
 {
-  KEY_UP   = 1,
-  KEY_DOWN = 0,
+  KEY_UP   = 0,
+  KEY_DOWN = 1,
 }KEYState_TypeDef;
 
 
