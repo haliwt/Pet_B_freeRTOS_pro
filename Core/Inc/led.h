@@ -65,7 +65,8 @@ typedef enum{
    tape_enable,
    sterilization_enable,
    keep_heat_enable,
-   add_dec_enable
+   add_dec_enable,
+   key_null,
 
 
 }confirm_item;

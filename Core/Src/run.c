@@ -147,7 +147,7 @@ void Run_Display_Handler(void)
 
 	if(first_power_on==0){
 		first_power_on++;
-     // KEY_FUN_CONFIRM_LED_SetLow();
+       KEY_FUN_CONFIRM_LED_SetLow();
 
 	}
 

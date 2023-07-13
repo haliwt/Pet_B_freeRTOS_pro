@@ -486,7 +486,7 @@ void Key_Confirm_Handler(uint8_t selitem)
         }
      
     
-
+      tpd_t.run_process_tag=key_null;
    break;
 
    case TAPE_LED:
@@ -537,7 +537,7 @@ void Key_Confirm_Handler(uint8_t selitem)
            RELAY_B_SetLow() ;
        }
 	  
-
+    tpd_t.run_process_tag=key_null;
    break;
 
    case STERILIZATION_LED:
@@ -591,7 +591,7 @@ void Key_Confirm_Handler(uint8_t selitem)
 
        }
    	   
-
+    tpd_t.run_process_tag=key_null;
    break;
 
    case KEEP_HEAT_LED:
@@ -657,7 +657,7 @@ void Key_Confirm_Handler(uint8_t selitem)
 
 
 			}
-			
+		tpd_t.run_process_tag=key_null;	
 
 	  break;
 
@@ -667,7 +667,7 @@ void Key_Confirm_Handler(uint8_t selitem)
 			  ADD_DEC_LED_OFF();  
 			  KEY_FUN_CONFIRM_LED_SetHigh() ;
 
-
+       tpd_t.run_process_tag=key_null;
 	  break;
     
 	 }

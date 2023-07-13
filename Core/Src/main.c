@@ -234,6 +234,7 @@ void KEY_Task(void* parameter)
  
   while (1)
   {
+   
     tpd_t.read_key_value=KEY_Scan();
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
