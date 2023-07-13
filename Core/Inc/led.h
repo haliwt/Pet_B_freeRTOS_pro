@@ -36,9 +36,9 @@
 #define RELAY_C_SetHigh()		HAL_GPIO_WritePin(RELAY_C_GPIO_Port, RELAY_C_Pin, GPIO_PIN_SET)
 #define RELAY_C_SetLow()		HAL_GPIO_WritePin(RELAY_C_GPIO_Port, RELAY_C_Pin, GPIO_PIN_RESET)
 
-
-#define RELAY_D_SetHigh()		HAL_GPIO_WritePin(RELAY_D_GPIO_Port , RELAY_D_Pin , GPIO_PIN_SET)
-#define RELAY_D_SetLow()		HAL_GPIO_WritePin(RELAY_D_GPIO_Port , RELAY_D_Pin , GPIO_PIN_RESET)
+//special GPIO output realay D
+#define RELAY_D_SetHigh()		HAL_GPIO_WritePin(RELAY_D_GPIO_Port , RELAY_D_Pin , GPIO_PIN_RESET) //special of gpio has MMBT3904
+#define RELAY_D_SetLow()		HAL_GPIO_WritePin(RELAY_D_GPIO_Port , RELAY_D_Pin , GPIO_PIN_SET)
 
 //circle led
   
@@ -54,7 +54,8 @@ typedef enum{
     STERILIZATION_LED,
     KEEP_HEAT_LED,
     ADD_DEC_LED,
-    LED_ALL_OFF
+    LED_ALL_OFF,
+    KEY_NULL
    
 }led_content;
 
@@ -66,7 +67,7 @@ typedef enum{
    sterilization_enable,
    keep_heat_enable,
    add_dec_enable,
-   key_null,
+   
 
 
 }confirm_item;
