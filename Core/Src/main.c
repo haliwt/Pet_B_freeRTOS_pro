@@ -218,7 +218,7 @@ void Led_Task(void* parameter)
   {
 	
 	Run_Display_Handler();
-    vTaskDelay(20);   /* 延时500个tick */
+    vTaskDelay(10);   /* 延时500个tick */
   }
 }
 
@@ -237,7 +237,7 @@ void KEY_Task(void* parameter)
     tpd_t.read_key_value=KEY_Scan();
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
-    vTaskDelay(50);/* 延时20个tick */
+    vTaskDelay(20);/* 延时20个tick */
   }
 }
 
