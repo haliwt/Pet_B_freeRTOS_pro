@@ -6,7 +6,7 @@
 #define Zero_Degree           5828    
 #define ADC_Sample_Times      10
 
-#define COMPENSATION_VALUE    2
+#define COMPENSATION_VALUE    0
 
 
 
@@ -18,6 +18,7 @@ uint8_t length_simple;
 uint16_t temp_variable_value_1;
 
 uint8_t  temp_degree;
+uint8_t temp_decimal_point;
 
 static uint16_t Read_NTC_Temperature_Voltage(void);
 
@@ -757,7 +758,7 @@ static uint8_t Calculate_Display_Temperature_Value(const uint16_t *pt,uint16_t k
 {
       uint8_t i;
 	  static uint8_t  rectify_value;
-	  uint8_t temp_decimal_point;
+	
 	  uint16_t temp_temperature_value;
       for(i=0;i<length;i++){
 
@@ -781,7 +782,7 @@ static uint8_t Calculate_Display_Temperature_Value(const uint16_t *pt,uint16_t k
 			}
 	 	    else if(*(pt+i) > key && (*(pt+i+1) < key)){
 
-            if(key- (*(pt+i+1)) >=10){
+            if(key- (*(pt+i+1)) >=20){ //10
                  tpd_t.temperature_rectify_value =1;
 				 
             }
