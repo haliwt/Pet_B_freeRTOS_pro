@@ -22,6 +22,7 @@ typedef struct _touchpad_t{
    uint8_t temperature_decimal_point_value;
    uint8_t read_key_value;
    uint8_t run_process_tag;
+   uint8_t keep_heat_flag;
 
  
    //display net temperatur degree

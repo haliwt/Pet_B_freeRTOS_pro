@@ -232,6 +232,11 @@ void Led_Display_Content_Fun(uint8_t selitem)
            if(tpd_t.confirm_key_select_item_keep_heat == confirm_disable){
               KEEP_HEAT_LED_OFF();
             }
+            else{
+
+              KEEP_HEAT_LED_ON();
+
+            }
 
         }
        
@@ -644,8 +649,11 @@ void Key_Confirm_Handler(uint8_t selitem)
           RELAY_C_SetLow();
 
        }
-	   
-      
+
+     // tpd_t.keep_heat_flag = run_t.keep_heat_flag ^ 0x01;
+
+     // if(run_t.keep_heat_flag==1){
+     
 	  if(tpd_t.keep_heat_run_flag==1){ //Confirm key of define key
            tpd_t.keep_heat_run_flag ++;
     
@@ -656,10 +664,10 @@ void Key_Confirm_Handler(uint8_t selitem)
 	   case 2:
 			if(tpd_t.gTimer_keep_heat_fun< 11){
 	
-				tpd_t.keep_heat_fun_digital_numbers=1;
+				tpd_t.keep_heat_fun_digital_numbers=1; //select keep heat item 
 				ADD_DEC_LED_ON();  
 				Keep_heat_SetUp_Led_Filcker();
-              //   Run_Keep_Heat_Setup_Digital_Numbers();
+           
 				
 			}
 			else{
@@ -669,6 +677,10 @@ void Key_Confirm_Handler(uint8_t selitem)
 				KEEP_HEAT_LED_OFF();
 				ADD_DEC_LED_OFF();  
 			    
+                }
+                else {
+                
+                    KEEP_HEAT_LED_ON();
                 }
 				tpd_t.keep_heat_fun_digital_numbers=0;
                 KEY_FUN_CONFIRM_LED_SetLow() ;
@@ -691,6 +703,7 @@ void Key_Confirm_Handler(uint8_t selitem)
 	  break;
     
 	 }
+    
 
    break;
 
