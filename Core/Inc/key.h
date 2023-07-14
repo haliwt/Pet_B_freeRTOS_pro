@@ -22,15 +22,15 @@
 #define		_KEY_ALL_OFF				 0XFF
 
 //normal times be pressed key
-#define FUNCTION_PRES 	0x01
-#define CONFIRM_PRES	0x02
+#define FUNCTION_KEY_PRES 	0x01
+#define CONFIRM_KEY_PRES	0x02
 
 
 
 
 //long times be pressed
 #define	   _KEY_CONT_1_POWER     	     0x81    //??????--???
-#define	   KEY_CONFIRM_MODE   		     0x82    //??????--???
+#define	   KEY_LONG_PRES_CONFIRM_MODE   		     0x82    //??????--???
 
 
 

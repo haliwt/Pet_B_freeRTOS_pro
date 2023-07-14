@@ -73,7 +73,9 @@ void Led_Display_Content_Fun(uint8_t selitem)
         Fan_Led_Flicker();
      }
      else{
-        FAN_LED_OFF();
+         if(tpd_t.confirm_key_select_item_fan == confirm_disable){
+          FAN_LED_OFF();
+            }
 
      }
 
@@ -120,8 +122,10 @@ void Led_Display_Content_Fun(uint8_t selitem)
    	    Tape_Led_Flicker();
 	 }
      else{
+        if(tpd_t.confirm_key_select_item_tape == confirm_disable){
 
         TAPE_LED_OFF();
+        }
      }
 
 	 
@@ -167,8 +171,10 @@ void Led_Display_Content_Fun(uint8_t selitem)
    	     Sterilization_Led_Filcker();
        }
        else{
+           if(tpd_t.confirm_key_select_item_sterilization == confirm_disable){
 
             STERILIZATION_LED_OFF();
+            }
 
        }
 
@@ -214,7 +220,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
          }
 
 	
-      //KEEP HEAT
+      //KEEP HEAT Display of LED 
        if(tpd_t.gTimer_select_fun < 6){
 	   	   Keep_Heat_Led_Filcker();
 		   tpd_t.keep_heat_run_flag= 1;
@@ -223,7 +229,9 @@ void Led_Display_Content_Fun(uint8_t selitem)
 		
        	}
         else{
-           KEEP_HEAT_LED_OFF();
+           if(tpd_t.confirm_key_select_item_keep_heat == confirm_disable){
+              KEEP_HEAT_LED_OFF();
+            }
 
         }
        
@@ -240,6 +248,12 @@ void Led_Display_Content_Fun(uint8_t selitem)
 	  ADD_DEC_LED_OFF();   
 
    break;
+
+   case KEY_NULL:
+
+   break;
+
+   
 
    default:
 
@@ -632,7 +646,7 @@ void Key_Confirm_Handler(uint8_t selitem)
        }
 	   
       
-	  if(tpd_t.keep_heat_run_flag==1){
+	  if(tpd_t.keep_heat_run_flag==1){ //Confirm key of define key
            tpd_t.keep_heat_run_flag ++;
     
 	  }
@@ -645,18 +659,21 @@ void Key_Confirm_Handler(uint8_t selitem)
 				tpd_t.keep_heat_fun_digital_numbers=1;
 				ADD_DEC_LED_ON();  
 				Keep_heat_SetUp_Led_Filcker();
+              //   Run_Keep_Heat_Setup_Digital_Numbers();
 				
 			}
 			else{
+                if(tpd_t.confirm_key_select_item_keep_heat == confirm_disable){
 				tpd_t.gTimer_keep_heat_fun= 12;
-				tpd_t.confirm_key_select_item_keep_heat = confirm_disable;
+				
 				KEEP_HEAT_LED_OFF();
 				ADD_DEC_LED_OFF();  
 			    
-
+                }
 				tpd_t.keep_heat_fun_digital_numbers=0;
                 KEY_FUN_CONFIRM_LED_SetLow() ;
                 tpd_t.run_process_tag=KEY_NULL; 
+               
 
 
 			}

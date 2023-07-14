@@ -28,13 +28,14 @@ void Run_InputKey_Model(uint8_t keyvalue)
 			
 	
 
-		case FUNCTION_PRES: //FUN
+		case FUNCTION_KEY_PRES: //FUN
 
 	    if(tpd_t.keep_heat_fun_digital_numbers ==1){
               tpd_t.gTimer_keep_heat_fun=0;
-			  tpd_t.digital_numbers++; //scope : 0~80度
+			  tpd_t.digital_numbers++; //scope : 0~40度
 			  if(tpd_t.digital_numbers>40) tpd_t.digital_numbers=0;
-			  Key_Confirm_Handler(KEEP_HEAT_LED);
+			  //Key_Confirm_Handler(KEEP_HEAT_LED);
+			   Run_Keep_Heat_Setup_Digital_Numbers();
 			
 
 		}
@@ -50,13 +51,14 @@ void Run_InputKey_Model(uint8_t keyvalue)
 		}
 		break;
 	
-		case CONFIRM_PRES: //CONFIRM_KEY
+		case CONFIRM_KEY_PRES: //CONFIRM_KEY
 
 		if(tpd_t.keep_heat_fun_digital_numbers ==1){
               tpd_t.gTimer_keep_heat_fun=0;
 			   Key_Confirm_Handler(KEEP_HEAT_LED);
-			  tpd_t.digital_numbers--; //scope : 0~80度--; //scope : 0 ~80 degree
+			  tpd_t.digital_numbers--; //scope : 0~40度--; //scope : 0 ~40 degree
 			  if(tpd_t.digital_numbers < 0)  tpd_t.digital_numbers=40; //scope : 0~80度=80;
+			  Run_Keep_Heat_Setup_Digital_Numbers();
 			  
 		}
 		else{
@@ -66,7 +68,7 @@ void Run_InputKey_Model(uint8_t keyvalue)
 	
 		break;
 
-		case KEY_CONFIRM_MODE : //long key 
+		case KEY_LONG_PRES_CONFIRM_MODE : //long key 
 			tpd_t.keep_heat_fun_digital_numbers=0;
             tpd_t.keep_heat_run_flag=3;
 			Key_Confirm_Handler(KEEP_HEAT_LED);
@@ -154,12 +156,8 @@ void Run_Display_Handler(void)
     break;
 
 	case 1:
-	   tpd_t.read_key_value=KEY_Scan();
-	   Run_Keep_Heat_Setup_Digital_Numbers();
-	   if(tpd_t.read_key_value == 0x82){
-		  tpd_t.keep_heat_fun_digital_numbers=0;
-	       tpd_t.keep_heat_run_flag=3;
-	   	}
+      Run_Keep_Heat_Setup_Digital_Numbers();
+			
 
 	break;
    }
