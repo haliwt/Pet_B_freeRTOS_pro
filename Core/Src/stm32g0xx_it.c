@@ -22,6 +22,7 @@
 #include "stm32g0xx_it.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -33,6 +34,11 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+/* ÉùÃ÷ÒýÓÃÍâ²¿¶ÓÁÐ & ¶þÖµÐÅºÅÁ¿ */
+extern QueueHandle_t Key_Queue;
+
+static uint32_t send_data1 = 1;
+static uint32_t send_data2 = 2;
 
 /* USER CODE END PD */
 
@@ -139,5 +145,50 @@ void TIM14_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+/**
+  * @brief This function handles EXTI line 4 to 15 interrupts.
+  */
+void EXTI2_3_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI4_15_IRQn 0 */
+   uint32_t ulReturn;
+   BaseType_t pxHighPriorityTaskWoken;
 
+  /* USER CODE END EXTI4_15_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(INPUT_KEY_CONFIRM_Pin);
+ 
+
+  /* USER CODE BEGIN EXTI4_15_IRQn 1 */
+   ulReturn = taskENTER_CRITICAL_FROM_ISR();
+   xQueueSendFromISR(Key_Queue, &send_data2, &pxHighPriorityTaskWoken);
+
+   portYIELD_FROM_ISR(pxHighPriorityTaskWoken);
+
+   taskEXIT_CRITICAL_FROM_ISR(ulReturn);
+
+  /* USER CODE END EXTI4_15_IRQn 1 */
+}
+
+/**
+  * @brief This function handles EXTI line 4 to 15 interrupts.
+  */
+void EXTI0_1_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI4_15_IRQn 0 */
+   uint32_t ulReturn;
+   BaseType_t pxHighPriorityTaskWoken;
+  /* USER CODE END EXTI4_15_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(INPUT_KEY_FUN_Pin);
+  
+
+  /* USER CODE BEGIN EXTI4_15_IRQn 1 */
+   ulReturn = taskENTER_CRITICAL_FROM_ISR();
+   xQueueSendFromISR(Key_Queue, &send_data1, &pxHighPriorityTaskWoken);
+
+   portYIELD_FROM_ISR(pxHighPriorityTaskWoken);
+
+   taskEXIT_CRITICAL_FROM_ISR(ulReturn);
+
+  /* USER CODE END EXTI4_15_IRQn 1 */
+}
 /* USER CODE END 1 */

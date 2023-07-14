@@ -35,6 +35,8 @@
 #include "interrupt_manager.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
+
 #include "run.h"
 /* USER CODE END Includes */
 
@@ -81,6 +83,11 @@ void MX_FREERTOS_Init(void);
 #define KEY_TASK_PRIO		2
 //任务堆栈大小	
 #define KEY_STK_SIZE 		64
+QueueHandle_t Key_Queue =NULL;
+#define  QUEUE_LEN    4   /* 露脫脕脨碌脛鲁陇露脠拢卢脳卯麓贸驴脡掳眉潞卢露脿脡脵赂枚脧没脧垄 */
+#define  QUEUE_SIZE   4   /* 露脫脕脨脰脨脙驴赂枚脧没脧垄麓贸脨隆拢篓脳脰陆脷拢漏 */
+
+
 
 /**************************** 任务句柄 ********************************
  
@@ -183,11 +190,19 @@ void AppTaskCreate(void)
   //  if(pdPASS == xReturn)
 //    printf("创建Test_Task任务成功!\r\n");
   /* 创建KEY_Task任务 */
+  Key_Queue = xQueueCreate((UBaseType_t)QUEUE_LEN, (UBaseType_t)QUEUE_SIZE);
+
+  if(NULL !=Key_Queue){
+    
+
+  }
+
+
   xReturn = xTaskCreate((TaskFunction_t )KEY_Task,  /* 任务入口函数 */
                         (const char*    )"KEY_Task",/* 任务名字 */
                         (uint16_t       )KEY_STK_SIZE,  /* 任务栈大小 */
                         (void*          )NULL,/* 任务入口函数参数 */
-                        (UBaseType_t    )2, /* 任务的优先级 */
+                        (UBaseType_t    )3, /* 任务的优先级 */
                         (TaskHandle_t*  )&KEY_Task_Handle);/* 任务控制块指针 */ 
 //  if(pdPASS == xReturn)
 //    printf("创建KEY_Task任务成功!\r\n");
@@ -197,7 +212,7 @@ void AppTaskCreate(void)
                         (const char*    )"Led_Task",/* 任务名字 */
                         (uint16_t       )LED0_STK_SIZE,    /* 任务栈大小 */
                         (void*          )NULL,	/* 任务入口函数参数 */
-                        (UBaseType_t    )3,	    /* 任务的优先级 */
+                        (UBaseType_t    )2,	    /* 任务的优先级 */
                         (TaskHandle_t*  )&Led_Task_Handle);/* 任务控制块指针 */
   
   vTaskDelete(AppTaskCreate_Handle); //删除AppTaskCreate任务
@@ -213,12 +228,23 @@ void AppTaskCreate(void)
   ********************************************************************/
 void Led_Task(void* parameter)
 {	
+
+  BaseType_t xReturn = pdPASS;/* 露篓脪氓脪禄赂枚麓麓陆篓脨脜脧垄路碌禄脴脰碌拢卢脛卢脠脧脦陋pdPASS */
+  uint32_t r_queue;	/* 露篓脪氓脪禄赂枚陆脫脢脮脧没脧垄碌脛卤盲脕驴 */
   KEY_FUN_CONFIRM_LED_SetLow();
   while (1)
   {
-	
-	Run_Display_Handler();
-    vTaskDelay(5);   /* 延时500个tick */
+	//queue read and receive ,waiting times
+	xReturn = xQueueReceive(Key_Queue,
+	                        &r_queue,
+	                        portMAX_DELAY);
+    
+	if(r_queue !=2 || r_queue !=1){                    
+	 Run_Display_Handler();
+    //vTaskDelay(5);   /* 延时500个tick */
+
+    }
+    
   }
 }
 
@@ -238,7 +264,7 @@ void KEY_Task(void* parameter)
     tpd_t.read_key_value=KEY_Scan();
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
-    vTaskDelay(20);/* 延时20个tick */
+    //vTaskDelay(20);/* 延时20个tick */
   }
 }
 
