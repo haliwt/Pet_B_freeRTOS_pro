@@ -30,6 +30,8 @@ void Run_InputKey_Model(uint8_t keyvalue)
 
 		case FUNCTION_KEY_PRES: //FUN
 
+         
+
 	    if(tpd_t.keep_heat_fun_digital_numbers ==1){
               tpd_t.gTimer_keep_heat_fun=0;
 			  tpd_t.digital_numbers++; //scope : 0~40度
@@ -53,6 +55,7 @@ void Run_InputKey_Model(uint8_t keyvalue)
 		break;
 	
 		case CONFIRM_KEY_PRES: //CONFIRM_KEY
+		  
 
 		if(tpd_t.keep_heat_fun_digital_numbers ==1){
               tpd_t.gTimer_keep_heat_fun=0;
@@ -71,6 +74,7 @@ void Run_InputKey_Model(uint8_t keyvalue)
 		break;
 
 		case KEY_LONG_PRES_CONFIRM_MODE : //long key 
+		    
 			tpd_t.keep_heat_fun_digital_numbers=0;
             tpd_t.keep_heat_run_flag=3;
 			Key_Confirm_Handler(KEEP_HEAT_LED);

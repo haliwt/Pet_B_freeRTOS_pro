@@ -78,19 +78,23 @@ void MX_FREERTOS_Init(void);
 //ÈÎÎñ¶ÑÕ»´óĞ¡	
 #define START_STK_SIZE 		128 
 //ÈÎÎñÓÅÏÈ¼¶
-#define LED_TASK_PRIO		3
+#define LED_TASK_PRIO		2
 //ÈÎÎñ¶ÑÕ»´óĞ¡	
-#define LED0_STK_SIZE 		128  
+#define LED0_STK_SIZE 		128 
 
 
 //ÈÎÎñÓÅÏÈ¼¶
-#define KEY_TASK_PRIO		2
+#define KEY_TASK_PRIO		3
 //ÈÎÎñ¶ÑÕ»´óĞ¡	
 #define KEY_STK_SIZE 		64
 
 //SemaphoreHandle_t MuxSem_Handle =NULL;
 
-QueueHandle_t Key_Queue =NULL;
+//QueueHandle_t Key1_Queue =NULL;
+//QueueHandle_t Key2_Queue =NULL;
+//QueueHandle_t Key3_Queue =NULL;
+
+
 
 /**************************** ÈÎÎñ¾ä±ú ********************************
  
@@ -98,6 +102,7 @@ QueueHandle_t Key_Queue =NULL;
  * ÒÔºóÎÒÃÇÒªÏë²Ù×÷Õâ¸öÈÎÎñ¶¼ĞèÒªÍ¨¹ıÕâ¸öÈÎÎñ¾ä±ú£¬Èç¹ûÊÇ×ÔÉíµÄÈÎÎñ²Ù×÷×Ô¼º£¬ÄÇÃ´
  * Õâ¸ö¾ä±ú¿ÉÒÔÎªNULL¡£
 ***********************************************************************/
+
 static TaskHandle_t AppTaskCreate_Handle = NULL;/* ´´½¨ÈÎÎñ¾ä±ú */
 static TaskHandle_t Led_Task_Handle = NULL;/* LEDÈÎÎñ¾ä±ú */
 static TaskHandle_t KEY_Task_Handle = NULL;/* KEYÈÎÎñ*/
@@ -191,10 +196,7 @@ void AppTaskCreate(void)
   
   taskENTER_CRITICAL();           //ï¿½ï¿½ï¿½ï¿½ï¿½Ù½ï¿½ï¿½ï¿½
 
-  Key_Queue = xQueueCreate((UBaseType_t) QUEUE_LEN,
-                           (UBaseType_t) QUEUE_SIZE);
-  if(NULL !=Key_Queue)
-      printf("create queue success\r\n") ;                   
+                 
   
   xReturn = xTaskCreate((TaskFunction_t )KEY_Task,  /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úºï¿½ï¿½ï¿½ */
                         (const char*    )"KEY_Task",/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
@@ -215,6 +217,8 @@ void AppTaskCreate(void)
 
   if(pdPASS == xReturn)
     printf("led_task success \r\n");
+  else
+    printf("led_task error \r\n"); 
   
   vTaskDelete(AppTaskCreate_Handle); //É¾ï¿½ï¿½AppTaskCreateï¿½ï¿½ï¿½ï¿½
   
@@ -229,58 +233,25 @@ void AppTaskCreate(void)
   ********************************************************************/
 void Led_Task(void* parameter)
 {	
-  BaseType_t xReturn = pdPASS;
-  uint32_t r_queue;
-  uint8_t key_value;
+ 
+
+  const TickType_t xMaxBlockTime = pdMS_TO_TICKS(10); /* maximum waiting 100ms */
+
   KEY_FUN_CONFIRM_LED_SetLow();
   while (1)
   {
 
-     xReturn = xQueueReceive( Key_Queue,    /* ÃÃ»ÃÂ¢Â¶Ã“ÃÃÂµÃ„Â¾Ã¤Â±Ãº */
-                             &r_queue,      /* Â·Â¢Ã‹ÃÂµÃ„ÃÃ»ÃÂ¢Ã„ÃšÃˆÃ */
-                             portMAX_DELAY); /* ÂµÃˆÂ´Ã½ÃŠÂ±Â¼Ã¤ Ã’Â»Ã–Â±ÂµÃˆ *///portMAX_DELAY
    
-    if(xReturn == pdTRUE){
-
-      
-
-       printf("Led_Task receive = %d \r\n",r_queue);  
-
-      switch(r_queue){
-
-      case 1:
-          key_value = FUNCTION_KEY_PRES;
-
-      break;
-
-      case 2:
-        key_value = CONFIRM_KEY_PRES;
-
-      break;
-
-      case 3:
-           key_value = KEY_LONG_PRES_CONFIRM_MODE;
-      break;
-
-       }
-   
-        Run_InputKey_Model(key_value);
-        Run_BoardCommand_Handler();
-    	Run_Display_Handler();
-     
+      Run_Display_Handler();
+      printf("led_task runing \r\n");
+      vTaskDelay(500);   /* ï¿½ï¿½Ê±500ï¿½ï¿½tick */
 
      
 
     }
-//    else
-//        printf("queue is error = %d \r\n",xReturn);   
-//   
-    
-   // taskYIELD();
-    vTaskDelay(3);   /* ï¿½ï¿½Ê±500ï¿½ï¿½tick */
-    }
-   // vTaskDelay(100);   /* ï¿½ï¿½Ê±500ï¿½ï¿½tick */
+
  }
+ 
 
 
 /**********************************************************************
@@ -293,55 +264,27 @@ void KEY_Task(void* parameter)
 {	
  // touchpad_t tpd_t;
  BaseType_t xReturn = pdPASS;/* define return of value ,defualt value pdPASS */
-
- uint32_t send_key_fun = 1;
- uint32_t send_key_confirm =2;
- uint32_t send_key_long_confir =3;
+ 
   while (1)
   {
 
-  
+   
     tpd_t.read_key_value=KEY_Scan();
+    if(tpd_t.read_key_value!=0){
+        vTaskSuspend(Led_Task_Handle);/* Â»Ã–Â¸Â´LEDÃˆÃÃÃ±Â£Â¡ */
+        printf("vTaskSuspend is success \r\n");
 
-    switch(tpd_t.read_key_value){
+     }
+    Run_InputKey_Model(tpd_t.read_key_value);
+    Run_BoardCommand_Handler();
 
-     case FUNCTION_KEY_PRES: //FUN
-       xReturn = xQueueSend(Key_Queue, 
-                             &send_key_fun, 
-                             0);
-       if(xReturn ==pdPASS){
-          printf("send_key_fun success !\r\n");
-
-       }
-
-     break;
-
-     case CONFIRM_KEY_PRES: //CONFIRM_KEY
-      xReturn = xQueueSend(Key_Queue, 
-                             &send_key_confirm, 
-                             0);
-       if(xReturn ==pdPASS){
-          printf("send_key_con success !\r\n");
-
-       }
-
-     break;
-
-     case KEY_LONG_PRES_CONFIRM_MODE : //long key 
-     xReturn = xQueueSend(Key_Queue, 
-                             &send_key_long_confir, 
-                             0 );
-       if(xReturn ==pdPASS){
-          printf("Led_Task_Handle_3 success !\r\n");
-
-       }
-
-     break;
-
-
-    }
-
-    vTaskDelay(10);/* ï¿½ï¿½Ê±20ï¿½ï¿½tick */
+    if(tpd_t.run_process_tag==KEY_NULL){
+        tpd_t.run_process_tag++;
+        printf("vTaskResume is success \r\n");
+        vTaskResume(Led_Task_Handle);/* Â»Ã–Â¸Â´LEDÃˆÃÃÃ±Â£Â¡ */
+        
+     }
+    vTaskDelay(1);/* ï¿½ï¿½Ê±20ï¿½ï¿½tick */
   
      }
 

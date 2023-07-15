@@ -49,7 +49,7 @@ uint8_t KEY_Scan(void)
 			if(key_t.read == key_t.buffer) // adjust key be down ->continunce be pressed key
 			{
 
-			 if(++key_t.on_time>10 ){//20
+			 if(++key_t.on_time>100 ){//20
 
 					key_t.value = key_t.buffer^_KEY_ALL_OFF; // key.value = 0xFE ^ 0xFF = 0x01
 					key_t.on_time = 0;                        //key .value = 0xEF ^ 0XFF = 0X10

@@ -75,7 +75,8 @@ void Led_Display_Content_Fun(uint8_t selitem)
      else{
          if(tpd_t.confirm_key_select_item_fan == confirm_disable){
           FAN_LED_OFF();
-            }
+          tpd_t.run_process_tag = KEY_NULL;
+          }
 
      }
 
@@ -125,6 +126,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
         if(tpd_t.confirm_key_select_item_tape == confirm_disable){
 
         TAPE_LED_OFF();
+         tpd_t.run_process_tag = KEY_NULL;
         }
      }
 
@@ -174,6 +176,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
            if(tpd_t.confirm_key_select_item_sterilization == confirm_disable){
 
             STERILIZATION_LED_OFF();
+             tpd_t.run_process_tag = KEY_NULL;
             }
 
        }
@@ -237,6 +240,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
               KEEP_HEAT_LED_ON();
 
             }
+             tpd_t.run_process_tag = KEY_NULL;
 
         }
        
@@ -719,6 +723,7 @@ void Key_Confirm_Handler(uint8_t selitem)
    break;
 
    case KEY_NULL:
+      
 
       KEY_FUN_CONFIRM_LED_SetLow() ;
       
