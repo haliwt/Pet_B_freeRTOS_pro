@@ -59,11 +59,11 @@ void Run_InputKey_Model(uint8_t keyvalue)
 
 		if(tpd_t.keep_heat_fun_digital_numbers ==1){
               tpd_t.gTimer_keep_heat_fun=0;
-			   Key_Confirm_Handler(KEEP_HEAT_LED);
 			  tpd_t.digital_numbers--; //scope : 0~40度--; //scope : 0 ~40 degree
 			  if(tpd_t.digital_numbers < 0)  tpd_t.digital_numbers=40; //scope : 0~80度=80;
+			  Key_Confirm_Handler(KEEP_HEAT_LED);
 			  Run_Keep_Heat_Setup_Digital_Numbers();
-               tpd_t.run_process_tag= KEY_CONFIRM_ITEM;
+              tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
 			  
 		}
 		else{
