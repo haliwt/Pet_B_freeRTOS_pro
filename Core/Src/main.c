@@ -187,7 +187,7 @@ void AppTaskCreate(void)
                         (const char*    )"KEY_Task",/* 任务名字 */
                         (uint16_t       )KEY_STK_SIZE,  /* 任务栈大小 */
                         (void*          )NULL,/* 任务入口函数参数 */
-                        (UBaseType_t    )2, /* 任务的优先级 */
+                        (UBaseType_t    )3, /* 任务的优先级 */
                         (TaskHandle_t*  )&KEY_Task_Handle);/* 任务控制块指针 */ 
 //  if(pdPASS == xReturn)
 //    printf("创建KEY_Task任务成功!\r\n");
@@ -197,7 +197,7 @@ void AppTaskCreate(void)
                         (const char*    )"Led_Task",/* 任务名字 */
                         (uint16_t       )LED0_STK_SIZE,    /* 任务栈大小 */
                         (void*          )NULL,	/* 任务入口函数参数 */
-                        (UBaseType_t    )3,	    /* 任务的优先级 */
+                        (UBaseType_t    )2,	    /* 任务的优先级 */
                         (TaskHandle_t*  )&Led_Task_Handle);/* 任务控制块指针 */
   
   vTaskDelete(AppTaskCreate_Handle); //删除AppTaskCreate任务
@@ -218,7 +218,7 @@ void Led_Task(void* parameter)
   {
 	
 	Run_Display_Handler();
-    vTaskDelay(5);   /* 延时500个tick */
+    vTaskDelay(100);   /* 延时500个tick */
   }
 }
 
@@ -238,7 +238,7 @@ void KEY_Task(void* parameter)
     tpd_t.read_key_value=KEY_Scan();
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
-    vTaskDelay(20);/* 延时20个tick */
+    vTaskDelay(1);/* 延时20个tick */
   }
 }
 

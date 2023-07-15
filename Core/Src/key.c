@@ -49,7 +49,7 @@ uint8_t KEY_Scan(void)
 			if(key_t.read == key_t.buffer) // adjust key be down ->continunce be pressed key
 			{
 
-			 if(++key_t.on_time>2 ){
+			 if(++key_t.on_time>20 ){
 
 					key_t.value = key_t.buffer^_KEY_ALL_OFF; // key.value = 0xFE ^ 0xFF = 0x01
 					key_t.on_time = 0;                        //key .value = 0xEF ^ 0XFF = 0X10
@@ -70,7 +70,7 @@ uint8_t KEY_Scan(void)
 		{
 			if(key_t.read == key_t.buffer) //again adjust key if be pressed down 
 			{
-				if(++key_t.on_time>80 && tpd_t.keep_heat_fun_digital_numbers==1)// 500 long key be down
+				if(++key_t.on_time>500 && tpd_t.keep_heat_fun_digital_numbers==1)// 500 long key be down
 				{
 					
 					key_t.value = key_t.value|0x80; //key.value(power_on) = 0x01 | 0x80  =0x81  
@@ -81,7 +81,7 @@ uint8_t KEY_Scan(void)
 			}
 			else if(key_t.read == _KEY_ALL_OFF)  // loose hand 
 				{
-					if(++key_t.off_time>0) //8 //30 don't holding key dithering
+					if(++key_t.off_time>2) //8 //30 don't holding key dithering
 					{
 						key_t.value = key_t.buffer^_KEY_ALL_OFF; // key.value = 0x1E ^ 0x1f = 0x01
 						
@@ -104,7 +104,7 @@ uint8_t KEY_Scan(void)
 		{
 			if(key_t.read == _KEY_ALL_OFF)
 			{
-				if(++key_t.off_time>0)//50 //100
+				if(++key_t.off_time>2)//50 //100
 				{
 					key_t.state   = start;
                    
