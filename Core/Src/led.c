@@ -721,6 +721,8 @@ void Key_Confirm_Handler(uint8_t selitem)
    case KEY_NULL:
 
       KEY_FUN_CONFIRM_LED_SetLow() ;
+      
+      
    break;
 
    default:
