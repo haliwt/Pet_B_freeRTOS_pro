@@ -277,7 +277,7 @@ void KEY_Task(void* parameter)
      }
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
-    if(tpd_t.gTimer_exit_keey_heat_fun > 20 &&  tpd_t.keep_heat_fun_digital_numbers==1 ){
+    if(tpd_t.gTimer_exit_keey_heat_fun > 7 &&  tpd_t.keep_heat_fun_digital_numbers==1 ){
   
         tpd_t.keep_heat_fun_digital_numbers=0;
      
