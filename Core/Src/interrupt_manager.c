@@ -32,6 +32,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    tpd_t.gTimer_display++;
 		tpd_t.gTimer_select_fun++;
 		tpd_t.gTimer_keep_heat_fun++;
+        tpd_t.gTimer_exit_keey_heat_fun++;
 		
 		
 

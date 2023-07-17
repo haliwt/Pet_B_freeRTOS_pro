@@ -34,10 +34,10 @@ void Run_InputKey_Model(uint8_t keyvalue)
 
 	    if(tpd_t.keep_heat_fun_digital_numbers ==1){
               tpd_t.gTimer_keep_heat_fun=0;
+               tpd_t.gTimer_select_fun=0;
 			  tpd_t.digital_numbers++; //scope : 0~40度
 			  if(tpd_t.digital_numbers>40) tpd_t.digital_numbers=0;
-			   Key_Confirm_Handler(KEEP_HEAT_LED);
-			   Run_Keep_Heat_Setup_Digital_Numbers();
+	
 			   tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
 
 		}
@@ -45,7 +45,6 @@ void Run_InputKey_Model(uint8_t keyvalue)
 
 	     tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
 	     if(led_on_of_number == KEEP_HEAT_LED)led_on_of_number =0;
-         if(led_on_of_number ==KEY_NULL)led_on_of_number =0;
 	     led_on_of_number++;
 		 led_t.gTimer_flicker=0;
 		 tpd_t.gTimer_select_fun=0;
@@ -59,25 +58,27 @@ void Run_InputKey_Model(uint8_t keyvalue)
 
 		if(tpd_t.keep_heat_fun_digital_numbers ==1){
               tpd_t.gTimer_keep_heat_fun=0;
+             tpd_t.gTimer_select_fun=0;
 			  tpd_t.digital_numbers--; //scope : 0~40度--; //scope : 0 ~40 degree
 			  if(tpd_t.digital_numbers < 0)  tpd_t.digital_numbers=40; //scope : 0~80度=80;
-			  Key_Confirm_Handler(KEEP_HEAT_LED);
-			  Run_Keep_Heat_Setup_Digital_Numbers();
+			
               tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
+              
 			  
 		}
 		else{
-             
-		      tpd_t.run_process_tag= KEY_CONFIRM_ITEM;
+        
+		        tpd_t.run_process_tag= KEY_CONFIRM_ITEM;
            }
 	
 		break;
 
-		case KEY_LONG_PRES_CONFIRM_MODE : //long key 
-		    
-			tpd_t.keep_heat_fun_digital_numbers=0;
-            tpd_t.keep_heat_run_flag=3;
+		case KEY_LONG_PRES_CONFIRM_MODE : //long key
+            if(led_on_of_number == KEEP_HEAT_LED){
+            tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable; 
 			Key_Confirm_Handler(KEEP_HEAT_LED);
+
+            }
 
 		break;
 
@@ -102,28 +103,25 @@ void Run_BoardCommand_Handler(void)
          
 
 	 case KEY_FUNCTION_ITEM:
-	 
-	    Led_Display_Content_Fun(led_on_of_number);
+	   if(tpd_t.keep_heat_fun_digital_numbers ==1){
+           Run_Keep_Heat_Setup_Digital_Numbers();
+
+        }
+
+       Led_Display_Content_Fun(led_on_of_number);
+       
 
      break;
 
 	 case KEY_CONFIRM_ITEM:
-             if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable && led_on_of_number ==KEEP_HEAT_LED){
-                 tpd_t.confirm_key_select_item_keep_heat= confirm_disable;
-                 RELAY_D_SetLow();
-                 KEEP_HEAT_LED_OFF();
-                 tpd_t.keep_heat_fun_digital_numbers =0;
-                 led_on_of_number =KEY_NULL;
-                 Key_Confirm_Handler(led_on_of_number);
-
-              }
-              else if(tpd_t.keep_heat_fun_digital_numbers ==1){
-                   
-			  	Key_Confirm_Handler(KEEP_HEAT_LED);
-
-			 
-			 }
-			 else 
+////             if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable && led_on_of_number ==KEEP_HEAT_LED){
+////                 tpd_t.confirm_key_select_item_keep_heat= confirm_disable;
+////                 RELAY_D_SetLow();
+////                 KEEP_HEAT_LED_OFF();
+////                 Key_Confirm_Handler(led_on_of_number);
+////
+////             }
+////			 else 
                Key_Confirm_Handler(led_on_of_number);
 	 
 

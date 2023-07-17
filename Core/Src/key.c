@@ -70,7 +70,7 @@ uint8_t KEY_Scan(void)
 		{
 			if(key_t.read == key_t.buffer) //again adjust key if be pressed down 
 			{
-				if(++key_t.on_time>500 && tpd_t.keep_heat_fun_digital_numbers==1)// 500 long key be down
+				if(++key_t.on_time>2000 && tpd_t.keep_heat_fun_digital_numbers==1)// 500 long key be down
 				{
 					
 					key_t.value = key_t.value|0x80; //key.value(power_on) = 0x01 | 0x80  =0x81  

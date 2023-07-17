@@ -224,44 +224,31 @@ void Led_Display_Content_Fun(uint8_t selitem)
 
 	
       //KEEP HEAT Display of LED 
-       if(tpd_t.gTimer_select_fun < 6){
+       if( tpd_t.gTimer_select_fun < 6){
 	   	   Keep_Heat_Led_Filcker();
-		   tpd_t.keep_heat_run_flag= 1;
+		   tpd_t.keep_heat_run_flag= 1; //has been selected keep heat flag
 	       led_t.gTimer_keey_heat_flicker=0;
-		   tpd_t.gTimer_keep_heat_fun=0;
+           tpd_t.gTimer_keep_heat_fun=0;
 		
        	}
         else{
            if(tpd_t.confirm_key_select_item_keep_heat == confirm_disable){
               KEEP_HEAT_LED_OFF();
+              
             }
             else{
 
               KEEP_HEAT_LED_ON();
 
             }
-             tpd_t.run_process_tag = KEY_NULL;
+            tpd_t.keep_heat_run_flag=0 ;
+            tpd_t.run_process_tag = KEY_NULL;
 
         }
        
 
       
    break;
-
-   case LED_ALL_OFF:
-
-      FAN_LED_OFF();
-	  TAPE_LED_OFF();
-	  STERILIZATION_LED_OFF();
-	  KEEP_HEAT_LED_OFF();
-	  ADD_DEC_LED_OFF();   
-
-   break;
-
-   case KEY_NULL:
-
-   break;
-
    
 
    default:
@@ -410,14 +397,14 @@ static void Keep_heat_SetUp_Led_Filcker(void)
 {
 
   
-	if(led_t.gTimer_keey_heat_flicker < 1){ //500ms
+	if(led_t.gTimer_keey_heat_flicker < 3){ //500ms
 
 		KEY_FUN_CONFIRM_LED_SetLow();
 		KEEP_HEAT_LED_ON();	
 	  
 
 	}
-	else if(led_t.gTimer_keey_heat_flicker >0 && led_t.gTimer_keey_heat_flicker <2){
+	else if(led_t.gTimer_keey_heat_flicker >2 && led_t.gTimer_keey_heat_flicker <6){
 
 
 		KEY_FUN_CONFIRM_LED_SetHigh();
@@ -449,7 +436,7 @@ static void Keep_heat_SetUp_Led_Filcker(void)
 void Key_Confirm_Handler(uint8_t selitem)
 {
 
-   static uint8_t fan_confirm_flag,tape_confirm_flag,kill_confirm_flag,keep_heat_flag;
+   static uint8_t fan_confirm_flag,tape_confirm_flag,kill_confirm_flag;
 
    switch(selitem){
 
@@ -654,19 +641,24 @@ void Key_Confirm_Handler(uint8_t selitem)
 
        }
 
-     // tpd_t.keep_heat_flag = run_t.keep_heat_flag ^ 0x01;
+      
+  
+      
+	  if(tpd_t.keep_heat_run_flag==1){ //Confirm key of define key item be selected flag 
 
-     // if(run_t.keep_heat_flag==1){
-     
-	  if(tpd_t.keep_heat_run_flag==1){ //Confirm key of define key
-           tpd_t.keep_heat_run_flag ++;
-    
-	  }
-	  //select keep heat fun
-	  switch(tpd_t.keep_heat_run_flag){
+         if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+  
+                 KEEP_HEAT_LED_OFF();
+                tpd_t.keep_heat_run_flag=0;
+				tpd_t.keep_heat_fun_digital_numbers=0;
+                KEY_FUN_CONFIRM_LED_SetLow() ;
 
-	   case 2:
-			if(tpd_t.gTimer_keep_heat_fun< 11){
+                tpd_t.confirm_key_select_item_keep_heat=confirm_disable;
+
+      
+        }
+        else{
+         if(tpd_t.gTimer_keep_heat_fun< 11){
 	
 				tpd_t.keep_heat_fun_digital_numbers=1; //select keep heat item 
 				ADD_DEC_LED_ON();  
@@ -686,43 +678,21 @@ void Key_Confirm_Handler(uint8_t selitem)
                 
                     KEEP_HEAT_LED_ON();
                 }
+                tpd_t.keep_heat_run_flag=0;
 				tpd_t.keep_heat_fun_digital_numbers=0;
                 KEY_FUN_CONFIRM_LED_SetLow() ;
                 tpd_t.run_process_tag=KEY_NULL; 
                
 
-
-			}
-		
-
+            }
+           }
+        }
 	  break;
 
-	  case 3:
-	  	      tpd_t.confirm_key_select_item_keep_heat = keep_heat_enable;
-	          KEEP_HEAT_LED_ON();
-			  ADD_DEC_LED_OFF();  
-			  KEY_FUN_CONFIRM_LED_SetLow() ;
-
-              tpd_t.run_process_tag=KEY_NULL;
-	  break;
+	
     
-	 }
-    
-
-   break;
-
-
-   case LED_ALL_OFF:
-
-      FAN_LED_OFF();
-	  TAPE_LED_OFF();
-	  STERILIZATION_LED_OFF();
-	  KEEP_HEAT_LED_OFF();
-	  ADD_DEC_LED_OFF();   
-
-   break;
-
-   case KEY_NULL:
+	
+    case KEY_NULL:
       
 
       KEY_FUN_CONFIRM_LED_SetLow() ;
