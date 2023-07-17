@@ -135,6 +135,17 @@ void Run_BoardCommand_Handler(void)
 
 	
      }
+     
+     if(tpd_t.gTimer_exit_keey_heat_fun > 7 &&  tpd_t.keep_heat_fun_digital_numbers==1 ){
+  
+        tpd_t.keep_heat_fun_digital_numbers=0;
+     
+        ADD_DEC_LED_OFF();
+    	tpd_t.run_process_tag= KEY_NULL ;//KEY_CONFIRM_ITEM;
+
+
+    }
+
 
 }
 

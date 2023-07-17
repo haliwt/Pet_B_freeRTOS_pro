@@ -277,15 +277,7 @@ void KEY_Task(void* parameter)
      }
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
-    if(tpd_t.gTimer_exit_keey_heat_fun > 7 &&  tpd_t.keep_heat_fun_digital_numbers==1 ){
-  
-        tpd_t.keep_heat_fun_digital_numbers=0;
-     
-        ADD_DEC_LED_OFF();
-    	tpd_t.run_process_tag= KEY_NULL ;//KEY_CONFIRM_ITEM;
 
-
-    }
 
     if(tpd_t.run_process_tag==KEY_NULL){
         tpd_t.run_process_tag++;

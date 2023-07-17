@@ -77,6 +77,9 @@ void Led_Display_Content_Fun(uint8_t selitem)
           FAN_LED_OFF();
           tpd_t.run_process_tag = KEY_NULL;
           }
+          else{
+             tpd_t.run_process_tag = KEY_NULL;
+          }
 
      }
 
@@ -128,6 +131,9 @@ void Led_Display_Content_Fun(uint8_t selitem)
         TAPE_LED_OFF();
          tpd_t.run_process_tag = KEY_NULL;
         }
+        else{
+          tpd_t.run_process_tag = KEY_NULL;
+        }
      }
 
 	 
@@ -177,7 +183,10 @@ void Led_Display_Content_Fun(uint8_t selitem)
 
             STERILIZATION_LED_OFF();
              tpd_t.run_process_tag = KEY_NULL;
-            }
+           }
+           else{
+             tpd_t.run_process_tag = KEY_NULL;
+          }
 
        }
 
@@ -241,16 +250,15 @@ void Led_Display_Content_Fun(uint8_t selitem)
         else{
            if(tpd_t.confirm_key_select_item_keep_heat == confirm_disable){
               KEEP_HEAT_LED_OFF();
+              tpd_t.run_process_tag = KEY_NULL;
               
             }
             else{
-
-              KEEP_HEAT_LED_ON();
+               tpd_t.run_process_tag = KEY_NULL;
+          
 
             }
         
-            tpd_t.run_process_tag = KEY_NULL;
-
         }
        
 
