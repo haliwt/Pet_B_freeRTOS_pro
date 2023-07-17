@@ -13,7 +13,7 @@ static void Sterilization_Led_Filcker(void);
 static void Keep_Heat_Led_Filcker(void);
 
 static void Add_Dec_Led_Filcker(void);
-static void Keep_heat_SetUp_Led_Filcker(void);
+
 
 /*************************************************************************
 	*
@@ -393,7 +393,7 @@ static void Add_Dec_Led_Filcker(void)
 }
 
 
-static void Keep_heat_SetUp_Led_Filcker(void)
+void Keep_heat_SetUp_Led_Filcker(void)
 {
 
   
@@ -646,7 +646,7 @@ void Key_Confirm_Handler(uint8_t selitem)
       
 	
 
-         if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+        if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
   
                  KEEP_HEAT_LED_OFF();
            
@@ -654,6 +654,7 @@ void Key_Confirm_Handler(uint8_t selitem)
                 KEY_FUN_CONFIRM_LED_SetLow() ;
 
                 tpd_t.confirm_key_select_item_keep_heat=confirm_disable;
+                tpd_t.run_process_tag=KEY_NULL; 
 
       
         }

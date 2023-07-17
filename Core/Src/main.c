@@ -244,7 +244,7 @@ void Led_Task(void* parameter)
    
       Run_Display_Handler();
       printf("led_task runing \r\n");
-      vTaskDelay(1000);   /* ��ʱ500��tick */
+      vTaskDelay(2000);   /* ��ʱ500��tick */
 
      
 

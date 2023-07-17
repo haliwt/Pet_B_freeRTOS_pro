@@ -1,6 +1,7 @@
 #include "tm1650.h"
 #include "delay.h"
 #include "run.h"
+#include "led.h"
 
 /**************************************************
 	*Smg LED Display Data Data:2020.07.23
@@ -317,31 +318,42 @@ void Smg_Display_Digital_Numbers_Changed(uint8_t numbers)
       uint_temp =   numbers  % 10;
 
 	  decimal_point =   0;//tpd_t.temperature_decimal_point_value ;
-   
- 
-   if(tpd_t.gTimer_smg_turn_on < 100){ //20*10 =200ms
-	     TM1650_Write_Data(0x48,0x71);//初始化为7级灰度，开显示,power off TM1650_Set(0x48,0x30);
-	     
-		
-		TM1650_Write_Data(0x68,segNumber[decade_temp]);//bit one  
+	    TM1650_Write_Data(0x68,segNumber[decade_temp]);//bit one  
 	   
 
 		TM1650_Write_Data(0x6A,segNumber[uint_temp]+seg_h);//bit two
 
 
 	    TM1650_Write_Data(0x6C,segNumber[decimal_point]);//decimal_point
-
-
-   	}
-	else if(tpd_t.gTimer_smg_turn_on >99    && tpd_t.gTimer_smg_turn_on < 110){
-
-	     TM1650_Write_Data(0x48,0x00);
-    }
-	else{
-	  tpd_t.gTimer_smg_turn_on =0;
-
-	}
+	    if(tpd_t.keep_heat_fun_digital_numbers==1){
 	
+			Keep_heat_SetUp_Led_Filcker();
+       }
+   
+ 
+//   if(tpd_t.gTimer_smg_turn_on < 100){ //20*10 =200ms
+//	     TM1650_Write_Data(0x48,0x71);//初始化为7级灰度，开显示,power off TM1650_Set(0x48,0x30);
+//	     
+//		
+//		TM1650_Write_Data(0x68,segNumber[decade_temp]);//bit one  
+//	   
+//
+//		TM1650_Write_Data(0x6A,segNumber[uint_temp]+seg_h);//bit two
+//
+//
+//	    TM1650_Write_Data(0x6C,segNumber[decimal_point]);//decimal_point
+//
+//
+//   	}
+//	else if(tpd_t.gTimer_smg_turn_on >99    && tpd_t.gTimer_smg_turn_on < 110){
+//
+//	     TM1650_Write_Data(0x48,0x00);
+//    }
+//	else{
+//	  tpd_t.gTimer_smg_turn_on =0;
+//
+//	}
+//	
 
 }
 
