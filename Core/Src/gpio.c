@@ -84,8 +84,8 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pins : PA1 PA2 PA3 PA4
                            PA5 PA6 PA7 PA11
                            PA12 */
-  GPIO_InitStruct.Pin = FUN_CONFIRM_LED_Pin |RELAY_A_Pin|RELAY_B_Pin|FAN_LED_Pin|TAPE_LED_Pin|KILL_LED_Pin
-                          |KEEP_TEMP_LED_Pin|ADD_DEC_LED_Pin|RELAY_C_Pin;
+  GPIO_InitStruct.Pin = FUN_CONFIRM_LED_Pin |RELAY_A_Pin|RELAY_B_Pin|RELAY_C_Pin|FAN_LED_Pin|TAPE_LED_Pin
+                        |KILL_LED_Pin|KEEP_TEMP_LED_Pin|ADD_DEC_LED_Pin;
                           
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;

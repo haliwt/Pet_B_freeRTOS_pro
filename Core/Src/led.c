@@ -94,11 +94,11 @@ void Led_Display_Content_Fun(uint8_t selitem)
       if(tpd_t.confirm_key_select_item_fan == fan_enable){
 		FAN_LED_ON();
 		
-		RELAY_A_SetHigh()	;
+		RELAY_A_SetHigh();
 		}
 		else{
-		FAN_LED_OFF();//FAN_LED_OFF();
-		RELAY_A_SetLow()	;
+		FAN_LED_OFF();
+		RELAY_A_SetLow();
 
 		}
 
@@ -507,7 +507,7 @@ void Key_Confirm_Handler(uint8_t selitem)
        if(fan_confirm_flag==1){
     	  tpd_t.confirm_key_select_item_fan = fan_enable ;
           FAN_LED_ON(); 
-    	
+    	  RELAY_A_SetHigh() ;
 
         }
         else{
