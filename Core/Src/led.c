@@ -226,7 +226,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
       //KEEP HEAT Display of LED 
        if( tpd_t.gTimer_select_fun < 6){
 	   	   Keep_Heat_Led_Filcker();
-		   tpd_t.keep_heat_run_flag= 1; //has been selected keep heat flag
+           tpd_t.gTimer_exit_keey_heat_fun=0;
 	       led_t.gTimer_keey_heat_flicker=0;
            tpd_t.gTimer_keep_heat_fun=0;
 		
@@ -241,7 +241,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
               KEEP_HEAT_LED_ON();
 
             }
-            tpd_t.keep_heat_run_flag=0 ;
+        
             tpd_t.run_process_tag = KEY_NULL;
 
         }
@@ -644,12 +644,12 @@ void Key_Confirm_Handler(uint8_t selitem)
       
   
       
-	  if(tpd_t.keep_heat_run_flag==1){ //Confirm key of define key item be selected flag 
+	
 
          if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
   
                  KEEP_HEAT_LED_OFF();
-                tpd_t.keep_heat_run_flag=0;
+           
 				tpd_t.keep_heat_fun_digital_numbers=0;
                 KEY_FUN_CONFIRM_LED_SetLow() ;
 
@@ -678,7 +678,7 @@ void Key_Confirm_Handler(uint8_t selitem)
                 
                     KEEP_HEAT_LED_ON();
                 }
-                tpd_t.keep_heat_run_flag=0;
+             
 				tpd_t.keep_heat_fun_digital_numbers=0;
                 KEY_FUN_CONFIRM_LED_SetLow() ;
                 tpd_t.run_process_tag=KEY_NULL; 
@@ -686,7 +686,7 @@ void Key_Confirm_Handler(uint8_t selitem)
 
             }
            }
-        }
+       
 	  break;
 
 	

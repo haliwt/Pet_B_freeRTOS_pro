@@ -35,10 +35,13 @@ void Run_InputKey_Model(uint8_t keyvalue)
 	    if(tpd_t.keep_heat_fun_digital_numbers ==1){
               tpd_t.gTimer_keep_heat_fun=0;
                tpd_t.gTimer_select_fun=0;
+              tpd_t.gTimer_exit_keey_heat_fun=0;
+              
 			  tpd_t.digital_numbers++; //scope : 0~40度
 			  if(tpd_t.digital_numbers>40) tpd_t.digital_numbers=0;
 	
 			   tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
+              
 
 		}
 		else{
@@ -59,6 +62,7 @@ void Run_InputKey_Model(uint8_t keyvalue)
 		if(tpd_t.keep_heat_fun_digital_numbers ==1){
               tpd_t.gTimer_keep_heat_fun=0;
              tpd_t.gTimer_select_fun=0;
+              tpd_t.gTimer_exit_keey_heat_fun=0;
 			  tpd_t.digital_numbers--; //scope : 0~40度--; //scope : 0 ~40 degree
 			  if(tpd_t.digital_numbers < 0)  tpd_t.digital_numbers=40; //scope : 0~80度=80;
 			
@@ -75,9 +79,10 @@ void Run_InputKey_Model(uint8_t keyvalue)
 
 		case KEY_LONG_PRES_CONFIRM_MODE : //long key
             if(led_on_of_number == KEEP_HEAT_LED){
-            if(tpd_t.keep_heat_fun_digital_numbers==1){
+               tpd_t.gTimer_exit_keey_heat_fun =0;
+              if(tpd_t.keep_heat_fun_digital_numbers==1){
                 tpd_t.confirm_key_select_item_keep_heat = keep_heat_enable; 
-                tpd_t.keep_heat_run_flag=0;
+    
     			tpd_t.keep_heat_fun_digital_numbers=0;
                 KEEP_HEAT_LED_ON();
                 ADD_DEC_LED_OFF();
@@ -121,14 +126,7 @@ void Run_BoardCommand_Handler(void)
      break;
 
 	 case KEY_CONFIRM_ITEM:
-////             if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable && led_on_of_number ==KEEP_HEAT_LED){
-////                 tpd_t.confirm_key_select_item_keep_heat= confirm_disable;
-////                 RELAY_D_SetLow();
-////                 KEEP_HEAT_LED_OFF();
-////                 Key_Confirm_Handler(led_on_of_number);
-////
-////             }
-////			 else 
+
                Key_Confirm_Handler(led_on_of_number);
 	 
 

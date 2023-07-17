@@ -39,7 +39,7 @@ typedef struct _touchpad_t{
    uint8_t gTimer_keep_heat_fun;
   
    //keep heat ref
-   uint8_t keep_heat_run_flag;
+
    uint8_t keep_heat_fun_digital_numbers;
    uint8_t gTimer_exit_keey_heat_fun;
   
