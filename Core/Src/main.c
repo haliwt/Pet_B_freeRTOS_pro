@@ -243,6 +243,7 @@ void Led_Task(void* parameter)
 
    
       Run_Display_Handler();
+      Run_Display_Keep_Temperature_Vaule();
       printf("led_task runing \r\n");
       vTaskDelay(2000);   /* ��ʱ500��tick */
 
@@ -277,6 +278,7 @@ void KEY_Task(void* parameter)
      }
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
+
 
 
     if(tpd_t.run_process_tag==KEY_NULL){

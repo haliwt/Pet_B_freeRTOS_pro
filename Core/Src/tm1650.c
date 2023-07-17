@@ -358,5 +358,33 @@ void Smg_Display_Digital_Numbers_Changed(uint8_t numbers)
 }
 
 
+void Run_Display_Keep_Temperature_Vaule(void)
+{
+    
+    static uint8_t decade_temp,uint_temp,decimal_point;
+        if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+            if(tpd_t.gTimer_smg_turn_on > 2 && tpd_t.gTimer_smg_turn_on < 10){ //20*10 =200ms
+                
+          decade_temp  = tpd_t.digital_numbers / 10;
+          uint_temp =   tpd_t.digital_numbers  % 10;
+    
+          decimal_point =   0;//tpd_t.temperature_decimal_point_value ;
+            TM1650_Write_Data(0x68,segNumber[decade_temp]);//bit one  
+           
+    
+            TM1650_Write_Data(0x6A,segNumber[uint_temp]+seg_h);//bit two
+    
+    
+            TM1650_Write_Data(0x6C,segNumber[decimal_point]);//decimal_point
+           }
+        
+        else{ 
+          tpd_t.gTimer_smg_turn_on=0;
+         // TM1650_Write_Data(0x48,0x00);
+    
+        }
+       }
+        
 
+}
 

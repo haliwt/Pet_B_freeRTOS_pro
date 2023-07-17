@@ -153,12 +153,7 @@ void Run_BoardCommand_Handler(void)
 void Run_Display_Handler(void)
 {
 
-    static uint8_t first_power_on;
-
-	switch(tpd_t.keep_heat_fun_digital_numbers){
-
-	  case 0:
-		
+ 
 	if(tpd_t.gTimer_read_adc >12 || tpd_t.power_on_times < 50){
 	  tpd_t.gTimer_read_adc =0;
       if(tpd_t.power_on_times < 10){
@@ -176,20 +171,10 @@ void Run_Display_Handler(void)
         
     }
 
-	if(first_power_on==0){
-		first_power_on++;
-       KEY_FUN_CONFIRM_LED_SetLow();
+    Run_Display_Keep_Temperature_Vaule();
 
-	}
 
-    break;
-
-	case 1:
-      Run_Keep_Heat_Setup_Digital_Numbers();
-			
-
-	break;
-   }
+  
 
 }
 
