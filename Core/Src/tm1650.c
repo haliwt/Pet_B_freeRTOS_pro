@@ -380,7 +380,7 @@ void Run_Display_Keep_Temperature_Vaule(void)
         
         else if(tpd_t.gTimer_smg_turn_on > 16){ 
           tpd_t.gTimer_smg_turn_on=0;
-         // TM1650_Write_Data(0x48,0x00);
+         
     
         }
        }

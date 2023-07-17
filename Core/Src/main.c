@@ -264,7 +264,7 @@ void Led_Task(void* parameter)
 void KEY_Task(void* parameter)
 {	
  // touchpad_t tpd_t;
- BaseType_t xReturn = pdPASS;/* define return of value ,defualt value pdPASS */
+ //BaseType_t xReturn = pdPASS;/* define return of value ,defualt value pdPASS */
  
   while (1)
   {
