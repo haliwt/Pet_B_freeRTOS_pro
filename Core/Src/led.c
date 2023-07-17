@@ -225,9 +225,16 @@ void Led_Display_Content_Fun(uint8_t selitem)
 	
       //KEEP HEAT Display of LED 
        if( tpd_t.gTimer_select_fun < 6){
-	   	   Keep_Heat_Led_Filcker();
+           if(tpd_t.keep_heat_fun_digital_numbers ==0){
+               led_t.gTimer_keey_heat_flicker=0;
+	   	       Keep_Heat_Led_Filcker();
+           }
+           else{
+               Keep_heat_SetUp_Led_Filcker();
+
+           }
            tpd_t.gTimer_exit_keey_heat_fun=0;
-	       led_t.gTimer_keey_heat_flicker=0;
+	     
            tpd_t.gTimer_keep_heat_fun=0;
 		
        	}
@@ -397,14 +404,14 @@ void Keep_heat_SetUp_Led_Filcker(void)
 {
 
   
-	if(led_t.gTimer_keey_heat_flicker < 3){ //500ms
+	if(led_t.gTimer_keey_heat_flicker < 1){ //500ms
 
 		KEY_FUN_CONFIRM_LED_SetLow();
 		KEEP_HEAT_LED_ON();	
 	  
 
 	}
-	else if(led_t.gTimer_keey_heat_flicker >2 && led_t.gTimer_keey_heat_flicker <6){
+	else if(led_t.gTimer_keey_heat_flicker >0 && led_t.gTimer_keey_heat_flicker <2){
 
 
 		KEY_FUN_CONFIRM_LED_SetHigh();
