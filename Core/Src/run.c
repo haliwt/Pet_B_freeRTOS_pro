@@ -158,6 +158,7 @@ void Run_Display_Handler(void)
 	  tpd_t.gTimer_read_adc =0;
       if(tpd_t.power_on_times < 10){
            Read_NTC_Temperature_Power_On();
+           Smg_Display_Temp_Degree_Handler();
       }
 	  else	
 	      Read_NTC_Temperature_Value_Handler();
