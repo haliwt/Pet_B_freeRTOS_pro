@@ -36,9 +36,10 @@ void Run_InputKey_Model(uint8_t keyvalue)
               tpd_t.gTimer_keep_heat_fun=0;
                tpd_t.gTimer_select_fun=0;
               tpd_t.gTimer_exit_keey_heat_fun=0;
-              
-			  tpd_t.digital_numbers++; //scope : 0~40度
-			  if(tpd_t.digital_numbers>40) tpd_t.digital_numbers=0;
+              if(tpd_t.digital_numbers==0)tpd_t.digital_numbers=20;
+              else
+			    tpd_t.digital_numbers++; //scope : 0~40度
+			  if(tpd_t.digital_numbers>40) tpd_t.digital_numbers=20;
 	
 			   tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
               
@@ -63,8 +64,11 @@ void Run_InputKey_Model(uint8_t keyvalue)
               tpd_t.gTimer_keep_heat_fun=0;
              tpd_t.gTimer_select_fun=0;
               tpd_t.gTimer_exit_keey_heat_fun=0;
-			  tpd_t.digital_numbers--; //scope : 0~40度--; //scope : 0 ~40 degree
-			  if(tpd_t.digital_numbers < 0)  tpd_t.digital_numbers=40; //scope : 0~80度=80;
+              
+			  if(tpd_t.digital_numbers ==0)tpd_t.digital_numbers=40;
+              else
+                tpd_t.digital_numbers--; //scope : 0~40度--; //scope : 0 ~40 degree
+			  if(tpd_t.digital_numbers < 20)  tpd_t.digital_numbers=40; //scope : 0~80度=80;
 			
               tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
               
@@ -154,17 +158,16 @@ void Run_Display_Handler(void)
 {
 
  
-	if(tpd_t.gTimer_read_adc >12 || tpd_t.power_on_times < 50){
+	if(tpd_t.gTimer_read_adc >59 || tpd_t.power_on_times < 50){
 	  tpd_t.gTimer_read_adc =0;
-      if(tpd_t.power_on_times < 10){
+      if(tpd_t.power_on_times < 50){
            Read_NTC_Temperature_Power_On();
-           Smg_Display_Temp_Degree_Handler();
       }
 	  else	
 	      Read_NTC_Temperature_Value_Handler();
     }
 	
-	if(tpd_t.gTimer_display > 6 || tpd_t.power_on_times < 50){
+	if(tpd_t.gTimer_display > 10 || tpd_t.power_on_times < 50){
       tpd_t.gTimer_display=0; 
 	  tpd_t.power_on_times++;
         
