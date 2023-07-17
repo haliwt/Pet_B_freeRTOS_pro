@@ -81,7 +81,8 @@ void Run_InputKey_Model(uint8_t keyvalue)
     			tpd_t.keep_heat_fun_digital_numbers=0;
                 KEEP_HEAT_LED_ON();
                 ADD_DEC_LED_OFF();
-    			tpd_t.run_process_tag= KEY_CONFIRM_ITEM;
+    			tpd_t.run_process_tag= KEY_NULL ;//KEY_CONFIRM_ITEM;
+                
             }
 
             }
