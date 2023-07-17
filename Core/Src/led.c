@@ -260,6 +260,8 @@ void Led_Display_Content_Fun(uint8_t selitem)
               
             }
             else{
+               KEEP_HEAT_LED_ON();
+               RELAY_D_SetHigh(); 
                tpd_t.run_process_tag = KEY_NULL;
           
 
@@ -696,6 +698,7 @@ void Key_Confirm_Handler(uint8_t selitem)
 			    
                 }
                 else {
+                    ADD_DEC_LED_OFF();  
                     RELAY_D_SetHigh();
                     KEEP_HEAT_LED_ON();
                 }

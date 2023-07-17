@@ -144,6 +144,22 @@ void Run_BoardCommand_Handler(void)
         tpd_t.keep_heat_fun_digital_numbers=0;
      
         ADD_DEC_LED_OFF();
+        KEY_FUN_CONFIRM_LED_SetLow();
+        if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+              ADD_DEC_LED_OFF();
+              KEEP_HEAT_LED_ON();
+              RELAY_D_SetHigh();
+
+
+        }
+        else{
+            ADD_DEC_LED_OFF();
+            KEEP_HEAT_LED_OFF();
+            RELAY_D_SetLow();
+
+           
+
+        }
     	tpd_t.run_process_tag= KEY_NULL ;//KEY_CONFIRM_ITEM;
 
 
