@@ -86,6 +86,7 @@ void Run_InputKey_Model(uint8_t keyvalue)
     			tpd_t.keep_heat_fun_digital_numbers=0;
                 KEEP_HEAT_LED_ON();
                 ADD_DEC_LED_OFF();
+                KEY_FUN_CONFIRM_LED_SetLow();
     			tpd_t.run_process_tag= KEY_NULL ;//KEY_CONFIRM_ITEM;
                 
             }
@@ -127,7 +128,7 @@ void Run_BoardCommand_Handler(void)
 
 	 case KEY_CONFIRM_ITEM:
 
-               Key_Confirm_Handler(led_on_of_number);
+       Key_Confirm_Handler(led_on_of_number);
 	 
 
 	 break;

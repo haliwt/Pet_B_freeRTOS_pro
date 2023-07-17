@@ -325,11 +325,11 @@ void Smg_Display_Digital_Numbers_Changed(uint8_t numbers)
 
 
 	    TM1650_Write_Data(0x6C,segNumber[decimal_point]);//decimal_point
-	    if(tpd_t.keep_heat_fun_digital_numbers==1){
-	
-			Keep_heat_SetUp_Led_Filcker();
-       }
-   
+//	    if(tpd_t.keep_heat_fun_digital_numbers==1){
+//	
+//			Keep_heat_SetUp_Led_Filcker();
+//       }
+//   
  
 //   if(tpd_t.gTimer_smg_turn_on < 100){ //20*10 =200ms
 //	     TM1650_Write_Data(0x48,0x71);//初始化为7级灰度，开显示,power off TM1650_Set(0x48,0x30);
