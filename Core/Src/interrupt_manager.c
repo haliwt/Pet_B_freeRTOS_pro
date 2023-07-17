@@ -16,7 +16,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     if(htim->Instance==TIM14){
        tm0++;
        tm1++;
-	    tpd_t.gTimer_smg_turn_on ++;
+	 
 	   if(tm1>49){ //50 *10ms =500ms
 	   	 tm1=0;
          led_t.gTimer_flicker ++;
@@ -32,6 +32,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	    tpd_t.gTimer_display++;
 		tpd_t.gTimer_select_fun++;
 		tpd_t.gTimer_keep_heat_fun++;
+        tpd_t.gTimer_smg_turn_on ++;
+        tpd_t.gTimer_exit_keey_heat_fun++;
 		
 		
 

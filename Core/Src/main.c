@@ -218,7 +218,7 @@ void Led_Task(void* parameter)
   {
 	
 	Run_Display_Handler();
-    vTaskDelay(100);   /* ��ʱ500��tick */
+    vTaskDelay(2000);   /* ��ʱ500��tick */
   }
 }
 
@@ -236,9 +236,23 @@ void KEY_Task(void* parameter)
   {
    
     tpd_t.read_key_value=KEY_Scan();
+    if(tpd_t.read_key_value!=0){
+        vTaskSuspend(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
+       // printf("vTaskSuspend is success \r\n");
+
+     }
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
-    vTaskDelay(1);/* ��ʱ20��tick */
+
+
+
+    if(tpd_t.run_process_tag==KEY_NULL){
+        tpd_t.run_process_tag++;
+       // printf("vTaskResume is success \r\n");
+        vTaskResume(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
+        
+     }
+    vTaskDelay(1);/* ��ʱ20��tick */
   }
 }
 

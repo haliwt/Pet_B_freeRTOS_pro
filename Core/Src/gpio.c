@@ -45,31 +45,37 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(SCL_GPIO_Port, SCL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_15, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(RELAY_D_GPIO_Port, RELAY_D_Pin, GPIO_PIN_SET);
+
+   /*Configure GPIO pin Output relay A,B,C,D*/
+   HAL_GPIO_WritePin(GPIOA,RELAY_A_Pin|RELAY_B_Pin|RELAY_C_Pin, GPIO_PIN_RESET);
+
+
+  /*Configure GPIO pin output fun confirm key of led */
+  HAL_GPIO_WritePin(GPIOA, FUN_CONFIRM_LED_Pin,GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4
-                          |GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_11
-                          |GPIO_PIN_12, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA,FAN_LED_Pin|TAPE_LED_Pin|KILL_LED_Pin
+                          |KEEP_TEMP_LED_Pin |ADD_DEC_LED_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin : PB7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_7;
+  GPIO_InitStruct.Pin = SCL_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : Input PB9 PB0 PB3 */
-  GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_0|GPIO_PIN_3;
+  GPIO_InitStruct.Pin = SDA_Pin|INPUT_KEY_FUN_Pin|INPUT_KEY_CONFIRM_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PC15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_15;
+  GPIO_InitStruct.Pin = RELAY_D_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -78,9 +84,9 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pins : PA1 PA2 PA3 PA4
                            PA5 PA6 PA7 PA11
                            PA12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4
-                          |GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_11
-                          |GPIO_PIN_12;
+  GPIO_InitStruct.Pin = FUN_CONFIRM_LED_Pin |RELAY_A_Pin|RELAY_B_Pin|FAN_LED_Pin|TAPE_LED_Pin|KILL_LED_Pin
+                          |KEEP_TEMP_LED_Pin|ADD_DEC_LED_Pin|RELAY_C_Pin;
+                          
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
