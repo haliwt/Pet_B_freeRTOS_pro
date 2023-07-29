@@ -352,7 +352,7 @@ void Run_Display_Keep_Temperature_Vaule(void)
     
     static uint8_t decade_temp,uint_temp,decimal_point;
         if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
-            if(tpd_t.gTimer_smg_turn_on > 10 && tpd_t.gTimer_smg_turn_on < 17){ //20*10 =200ms
+            if(tpd_t.gTimer_smg_turn_on > 10 && tpd_t.gTimer_smg_turn_on < 15){ //20*10 =200ms
                 
           decade_temp  = tpd_t.digital_numbers / 10;
           uint_temp =   tpd_t.digital_numbers  % 10;
@@ -367,7 +367,7 @@ void Run_Display_Keep_Temperature_Vaule(void)
             TM1650_Write_Data(0x6C,segNumber[decimal_point]);//decimal_point
            }
         
-        else if(tpd_t.gTimer_smg_turn_on > 16){ 
+        else if(tpd_t.gTimer_smg_turn_on > 14){ 
           tpd_t.gTimer_smg_turn_on=0;
          
     
