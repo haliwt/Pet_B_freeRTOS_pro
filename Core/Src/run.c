@@ -81,8 +81,9 @@ void Run_InputKey_Model(uint8_t keyvalue)
 		break;
 
 		case KEY_LONG_PRES_CONFIRM_MODE : //long key
-            if(led_on_of_number == KEEP_HEAT_LED){
+            if(led_on_of_number == KEEP_HEAT_LED ){
                tpd_t.gTimer_exit_keey_heat_fun =0;
+               tpd_t.key_confirm_enable =key_confirm_disable;
               if(tpd_t.keep_heat_fun_digital_numbers==1){
                 tpd_t.confirm_key_select_item_keep_heat = keep_heat_enable; 
     
@@ -92,6 +93,7 @@ void Run_InputKey_Model(uint8_t keyvalue)
                 KEY_FUN_CONFIRM_LED_SetLow();
                 RELAY_D_SetHigh();
     			tpd_t.run_process_tag= KEY_NULL ;//KEY_CONFIRM_ITEM;
+    			
                 
             }
 
