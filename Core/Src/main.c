@@ -255,7 +255,7 @@ void KEY_Task(void* parameter)
         vTaskSuspend(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
        // printf("vTaskSuspend is success \r\n");
 
-     }
+     
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
 
@@ -265,9 +265,13 @@ void KEY_Task(void* parameter)
         tpd_t.key_confirm_enable = key_confirm_disable;
         tpd_t.run_process_tag++;
        // printf("vTaskResume is success \r\n");
-        vTaskResume(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
+       vTaskResume(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
         
      }
+     if(tpd_t.run_process_tag==8){
+      vTaskResume(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
+     }
+    }
     vTaskDelay(1);/* ��ʱ20��tick */
   }
 }
