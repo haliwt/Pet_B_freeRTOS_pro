@@ -262,6 +262,7 @@ void KEY_Task(void* parameter)
 
 
     if(tpd_t.run_process_tag==KEY_NULL){
+        tpd_t.key_confirm_enable = key_confirm_disable;
         tpd_t.run_process_tag++;
        // printf("vTaskResume is success \r\n");
         vTaskResume(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
