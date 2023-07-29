@@ -182,7 +182,7 @@ void Run_Display_Handler(void)
 {
 
   
-	if(tpd_t.gTimer_read_adc >59 || tpd_t.power_on_times < 50){
+	if((tpd_t.gTimer_read_adc >59 || tpd_t.power_on_times < 50)&&tpd_t.keep_heat_fun_digital_numbers ==0){
 	  tpd_t.gTimer_read_adc =0;
       if(tpd_t.power_on_times < 50){
            Read_NTC_Temperature_Power_On();
