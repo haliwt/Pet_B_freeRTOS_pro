@@ -82,6 +82,11 @@ void MX_FREERTOS_Init(void);
 //任务堆栈大小	
 #define KEY_STK_SIZE 		64
 
+#define BIT_0	(1 << 0)  //0b0001
+#define BIT_1	(1 << 1)  //0b0010
+#define BIT_2   (1 << 2)  //0b0100
+
+
 /**************************** 任务句柄 ********************************
  
  * 任务句柄是一个指针，用于指向一个任务，当任务创建好之后，它就具有了一个任务句柄
@@ -262,7 +267,7 @@ void KEY_Task(void* parameter)
         vTaskResume(Led_Task_Handle);/* 禄脰赂麓LED脠脦脦帽拢隆 */
         
      }
-    vTaskDelay(1);/* 锟斤拷时20锟斤拷tick */
+    vTaskDelay(2);/* 锟斤拷时20锟斤拷tick */
   }
 }
 

@@ -38,7 +38,7 @@ void Run_InputKey_Model(uint8_t keyvalue)
               if(tpd_t.digital_numbers==0)tpd_t.digital_numbers=20;
               else
 			    tpd_t.digital_numbers++; //scope : 0~40度
-			  if(tpd_t.digital_numbers>40) tpd_t.digital_numbers=20;
+			  if(tpd_t.digital_numbers>25) tpd_t.digital_numbers=20;
 	
 			   tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
               
@@ -64,10 +64,10 @@ void Run_InputKey_Model(uint8_t keyvalue)
              tpd_t.gTimer_select_fun=0;
               tpd_t.gTimer_exit_keey_heat_fun=0;
               
-			  if(tpd_t.digital_numbers ==0)tpd_t.digital_numbers=40;
+			  if(tpd_t.digital_numbers ==0)tpd_t.digital_numbers=20;
               else
                 tpd_t.digital_numbers--; //scope : 0~40度--; //scope : 0 ~40 degree
-			  if(tpd_t.digital_numbers < 20)  tpd_t.digital_numbers=40; //scope : 0~80度=80;
+			  if(tpd_t.digital_numbers < 20)  tpd_t.digital_numbers=25; //scope : 0~80度=80;
 			
               tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
               
@@ -170,8 +170,14 @@ void Run_BoardCommand_Handler(void)
 
 
 
-
-
+/***************************************************************************
+    *
+    *Function Name:void Run_Display_Handler(void)
+    *Function :display smg and led of content 
+    *Input Ref:NO
+    *Return Ref:NO
+    *
+***************************************************************************/
 void Run_Display_Handler(void)
 {
 
@@ -195,7 +201,45 @@ void Run_Display_Handler(void)
 
     Run_Display_Keep_Temperature_Vaule();
 
-}
+    if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+        if(tpd_t.digital_numbers > tpd_t.temperature_value  || tpd_t.temperature_value <20){  //open on
+
+              tpd_t.keep_heat_temperature_value_low =0;
+    		  KEEP_HEAT_LED_ON();
+              RELAY_D_SetHigh();
+            
+    	  	 
+       }
+       else if((tpd_t.digital_numbers -2) <=tpd_t.temperature_value || tpd_t.temperature_value > 25){
+        // KEEP_HEAT_LED_OFF();
+         RELAY_D_SetLow();
+         tpd_t.keep_heat_temperature_value_low =1;
+
+
+       }
+    }
+ //   else{
+
+//       if(tpd_t.temp_degree < 20){ //open on 
+//       
+//            KEEP_HEAT_LED_ON();
+//            RELAY_D_SetHigh();
+//
+//
+//      }
+//      else if(tpd_t.temp_degree >25){
+//
+//           KEEP_HEAT_LED_OFF();
+//           RELAY_D_SetLow();
+//
+//
+//      }
+       
+
+
+ }
+
+
 
 
 

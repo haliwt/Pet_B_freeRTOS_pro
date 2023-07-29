@@ -200,7 +200,7 @@ static uint16_t Read_NTC_Temperature_Voltage(void)
 	*
 	*
 *************************************************************************/
-static int8_t  Binary_Search(const uint8_t *array ,uint8_t key,uint8_t length)
+static int8_t Binary_Search(const uint8_t *array ,uint8_t key,uint8_t length)
 {
      left_point =0 ;
 	right_point = length -1;
@@ -210,7 +210,7 @@ static int8_t  Binary_Search(const uint8_t *array ,uint8_t key,uint8_t length)
 
         if(key == array[mid_value]){
 
-		    return   mid_value;
+		    return mid_value;
 
 		}
         else if(array[mid_value] >   key ){ //right ->small
@@ -226,6 +226,8 @@ static int8_t  Binary_Search(const uint8_t *array ,uint8_t key,uint8_t length)
 
 
       } 
+
+   return  -1;
 
    
 }
@@ -357,7 +359,7 @@ void Read_NTC_Temperature_Value_Handler(void)
   
 	 #if 1
 	 tpd_t.ntc_voltage_value= Read_NTC_Temperature_Voltage();
-      temp_uint16_t_vlue= tpd_t.ntc_voltage_value /100;
+     temp_uint16_t_vlue= tpd_t.ntc_voltage_value /100;
 	 length_simple = sizeof(R10K_Init_0_81_simple)/sizeof(R10K_Init_0_81_simple[0]);
     
    	 tpd_t.temp_degree = Binary_Search(R10K_Init_0_81_simple,temp_uint16_t_vlue,length_simple);
@@ -852,14 +854,14 @@ static uint8_t Calculate_Display_Temperature_Value(const uint16_t *pt,uint16_t k
                
                }
           
-		
-
-		 
-		
-	
-      }
+		}
 	  
   }
 }
+
+
+
+
+
 
 
