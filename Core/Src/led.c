@@ -64,7 +64,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
     		  KEEP_HEAT_LED_ON();
           }
           else{
-
+              KEEP_HEAT_LED_ON();
               RELAY_D_SetLow();
              
 
@@ -130,7 +130,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
     		  KEEP_HEAT_LED_ON();
           }
           else{
-
+              KEEP_HEAT_LED_ON();
               RELAY_D_SetLow();
               
 
@@ -189,7 +189,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
     		  KEEP_HEAT_LED_ON();
           }
           else{
-
+             KEEP_HEAT_LED_ON();
              RELAY_D_SetLow();
               
 
@@ -283,18 +283,50 @@ void Led_Display_Content_Fun(uint8_t selitem)
               tpd_t.run_process_tag = KEY_NULL;
               
             }
-            else{
-               KEEP_HEAT_LED_ON();
-               RELAY_D_SetHigh(); 
-               tpd_t.run_process_tag = KEY_NULL;
-          
+            
 
+           if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+             if(tpd_t.keep_heat_temperature_value_low ==0){
+              RELAY_D_SetHigh();
+    		  KEEP_HEAT_LED_ON();
+             }
+             else{
+             
+             KEEP_HEAT_LED_ON();
+
+             RELAY_D_SetLow();
+              
+
+             }
+
+             tpd_t.run_process_tag = KEY_NULL;
             }
         
         }
        
 
       
+   break;
+
+   case KEY_NULL:
+     if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+             if(tpd_t.keep_heat_temperature_value_low ==0){
+              RELAY_D_SetHigh();
+    		  KEEP_HEAT_LED_ON();
+             }
+             else{
+             
+             KEEP_HEAT_LED_ON();
+
+             RELAY_D_SetLow();
+              
+
+             }
+
+            
+      }
+
+
    break;
    
 
@@ -524,7 +556,9 @@ void Key_Confirm_Handler(uint8_t selitem)
                 KEEP_HEAT_LED_ON();
             }
             else{
-               // KEEP_HEAT_LED_OFF();
+              
+               
+                KEEP_HEAT_LED_ON();
 
                 RELAY_D_SetLow();
                
@@ -582,7 +616,7 @@ void Key_Confirm_Handler(uint8_t selitem)
     		  KEEP_HEAT_LED_ON();
           }
           else{
-
+                KEEP_HEAT_LED_ON();
               RELAY_D_SetLow();
              
 
@@ -644,7 +678,7 @@ void Key_Confirm_Handler(uint8_t selitem)
     		  KEEP_HEAT_LED_ON();
           }
           else{
-
+              KEEP_HEAT_LED_ON();
               RELAY_D_SetLow();
              
 
@@ -744,9 +778,16 @@ void Key_Confirm_Handler(uint8_t selitem)
 			    
                 }
                 else {
-                    ADD_DEC_LED_OFF();  
-                    RELAY_D_SetHigh();
-                    KEEP_HEAT_LED_ON();
+                     if(tpd_t.keep_heat_temperature_value_low ==0){
+                          RELAY_D_SetHigh();
+                		  KEEP_HEAT_LED_ON();
+                      }
+                      else{
+                          KEEP_HEAT_LED_ON();
+                          RELAY_D_SetLow();
+                         
+
+                      }
                 }
              
 				tpd_t.keep_heat_fun_digital_numbers=0;
@@ -766,6 +807,18 @@ void Key_Confirm_Handler(uint8_t selitem)
       
 
       KEY_FUN_CONFIRM_LED_SetLow() ;
+      if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+          if(tpd_t.keep_heat_temperature_value_low ==0){
+              RELAY_D_SetHigh();
+    		  KEEP_HEAT_LED_ON();
+          }
+          else{
+              KEEP_HEAT_LED_ON();
+              RELAY_D_SetLow();
+             
+
+          }
+	  }
       
       
    break;
