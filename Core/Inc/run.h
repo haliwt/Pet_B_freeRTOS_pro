@@ -11,6 +11,14 @@ typedef enum {
 }key_item;
 
 
+typedef enum{
+
+   key_confirm_disable,
+   key_confirm_enable
+
+}key_confirm_state;
+
+
 typedef struct _touchpad_t{
 
    //smg
@@ -41,6 +49,7 @@ typedef struct _touchpad_t{
    uint8_t keep_heat_run_flag;
    uint8_t keep_heat_fun_digital_numbers;
    uint8_t gTimer_exit_keey_heat_fun;
+   uint8_t key_confirm_enable ;
   
    uint8_t gTimer_smg_turn_on ;
 

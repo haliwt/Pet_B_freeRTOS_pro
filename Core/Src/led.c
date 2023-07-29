@@ -80,7 +80,9 @@ void Led_Display_Content_Fun(uint8_t selitem)
 		
    	 
 	 if(tpd_t.gTimer_select_fun < 6){
+        tpd_t.key_confirm_enable =key_confirm_enable;
         Fan_Led_Flicker();
+        
      }
      else{
          if(tpd_t.confirm_key_select_item_fan == confirm_disable){
@@ -91,6 +93,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
           else{
              tpd_t.run_process_tag = KEY_NULL;
           }
+          tpd_t.key_confirm_enable =key_confirm_disable;
 
      }
 
@@ -142,6 +145,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
           }
    	  
 	 if(tpd_t.gTimer_select_fun < 6){
+        tpd_t.key_confirm_enable =key_confirm_enable;
    	    Tape_Led_Flicker();
 	 }
      else{
@@ -154,6 +158,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
         else{
           tpd_t.run_process_tag = KEY_NULL;
         }
+        tpd_t.key_confirm_enable =key_confirm_disable;
      }
 
 	 
@@ -204,6 +209,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
 
      //STERILIZATION
       if(tpd_t.gTimer_select_fun < 6){
+         tpd_t.key_confirm_enable =key_confirm_enable;
    	     Sterilization_Led_Filcker();
        }
        else{
@@ -216,6 +222,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
            else{
              tpd_t.run_process_tag = KEY_NULL;
           }
+          tpd_t.key_confirm_enable =key_confirm_disable;
 
        }
 
@@ -263,11 +270,14 @@ void Led_Display_Content_Fun(uint8_t selitem)
 	
       //KEEP HEAT Display of LED 
        if( tpd_t.gTimer_select_fun < 6){
+          
            if(tpd_t.keep_heat_fun_digital_numbers ==0){
                led_t.gTimer_keey_heat_flicker=0;
+               tpd_t.key_confirm_enable =key_confirm_enable;
 	   	       Keep_Heat_Led_Filcker();
            }
            else{
+               tpd_t.key_confirm_enable =key_confirm_enable;
                Keep_heat_SetUp_Led_Filcker();
 
            }
@@ -301,7 +311,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
 
              tpd_t.run_process_tag = KEY_NULL;
             }
-        
+           tpd_t.key_confirm_enable =key_confirm_disable;
         }
        
 

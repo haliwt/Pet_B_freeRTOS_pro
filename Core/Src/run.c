@@ -74,8 +74,8 @@ void Run_InputKey_Model(uint8_t keyvalue)
 			  
 		}
 		else{
-        
-		        tpd_t.run_process_tag= KEY_CONFIRM_ITEM;
+                if(tpd_t.key_confirm_enable ==key_confirm_enable)
+		            tpd_t.run_process_tag= KEY_CONFIRM_ITEM;
            }
 	
 		break;
