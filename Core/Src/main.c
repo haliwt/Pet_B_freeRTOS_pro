@@ -223,7 +223,7 @@ void Led_Task(void* parameter)
   {
 	
 	Run_Display_Handler();
-    vTaskDelay(2000);   /* 延时500个tick */
+    vTaskDelay(1000);   /* 延时500个tick */
   }
 }
 

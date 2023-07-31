@@ -51,7 +51,7 @@ typedef struct _touchpad_t{
    uint8_t gTimer_exit_keey_heat_fun;
    uint8_t key_confirm_enable ;
   
-   uint8_t gTimer_smg_turn_on ;
+
 
    uint8_t power_on_times;
    uint8_t temperature_rectify_value;
