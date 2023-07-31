@@ -364,12 +364,12 @@ void Led_Display_Content_Fun(uint8_t selitem)
 static void Fan_Led_Flicker(void)
 {
    
-	if(led_t.gTimer_flicker < 10 ){ //10ms*10
+	if(led_t.gTimer_flicker < 30 ){ //10ms*10
 
 	  FAN_LED_ON();
 
     }
-	else if(led_t.gTimer_flicker >9 && led_t.gTimer_flicker <21){
+	else if(led_t.gTimer_flicker >29 && led_t.gTimer_flicker <61){
 
 	    
 	  FAN_LED_OFF();
@@ -386,12 +386,12 @@ static void Fan_Led_Flicker(void)
 
 static void Tape_Led_Flicker(void)
 {
-	if(led_t.gTimer_flicker < 10){ //10ms*10
+	if(led_t.gTimer_flicker < 30){ //10ms*10
 	
 		 TAPE_LED_ON()  ;
 	
 	   }
-	   else if(led_t.gTimer_flicker >9 && led_t.gTimer_flicker <21){
+	   else if(led_t.gTimer_flicker >29 && led_t.gTimer_flicker <61){
 	
 		  TAPE_LED_OFF();
 	
@@ -410,12 +410,12 @@ static void Tape_Led_Flicker(void)
 static void Sterilization_Led_Filcker(void)
 {
 
-	if(led_t.gTimer_flicker < 10){ //500ms
+	if(led_t.gTimer_flicker < 30){ //500ms
 	
 		 STERILIZATION_LED_ON();
 	
 	   }
-	   else if(led_t.gTimer_flicker >9 && led_t.gTimer_flicker <21){
+	   else if(led_t.gTimer_flicker >29 && led_t.gTimer_flicker <61){
 	
 		  STERILIZATION_LED_OFF();
 	
@@ -434,12 +434,12 @@ static void Sterilization_Led_Filcker(void)
 static void Keep_Heat_Led_Filcker(void)
 {
 
-	if(led_t.gTimer_flicker < 10){ //500ms
+	if(led_t.gTimer_flicker < 30){ //500ms
 	
 		KEEP_HEAT_LED_ON();
 	
 	   }
-	   else if(led_t.gTimer_flicker >9 && led_t.gTimer_flicker <21){
+	   else if(led_t.gTimer_flicker >29 && led_t.gTimer_flicker <61){
 	
 		 
 	     KEEP_HEAT_LED_OFF();
@@ -460,22 +460,24 @@ static void Add_Dec_Led_Filcker(void)
 {
 
   
-	if(led_t.gTimer_flicker < 10){ //500ms
+//	if(led_t.gTimer_flicker < 10){ //500ms
+//
+//		ADD_DEC_LED_ON();	
+//	//	KEEP_HEAT_LED_ON();
+//
+//	}
+//	else if(led_t.gTimer_flicker >9 && led_t.gTimer_flicker <21){
+//
+//
+//		ADD_DEC_LED_OFF();		
+//
+//	}
+//	else{
+//		led_t.gTimer_flicker=0;
+//
+//	}
 
-		ADD_DEC_LED_ON();	
-		KEEP_HEAT_LED_ON();
-
-	}
-	else if(led_t.gTimer_flicker >9 && led_t.gTimer_flicker <21){
-
-
-		ADD_DEC_LED_OFF();		
-
-	}
-	else{
-		led_t.gTimer_flicker=0;
-
-	}
+    ADD_DEC_LED_ON();	
 
 
 
