@@ -354,7 +354,6 @@ void Run_Display_Keep_Heat_Temperature_Vaule(void)
     static uint8_t decade_temp,uint_temp,decimal_point;
 
        
-                
     decade_temp  = tpd_t.digital_numbers / 10;
     uint_temp =   tpd_t.digital_numbers  % 10;
 
