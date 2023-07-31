@@ -241,20 +241,20 @@ void KEY_Task(void* parameter)
   while (1)
   {
    
-    if(power_on_first==0){
-       power_on_first ++;
-       Read_NTC_Temperature_Value_Handler();
-       Smg_Display_Temp_Degree_Handler();
-       HAL_Delay(100);
-
-    }
+//    if(power_on_first==0){
+//       power_on_first ++;
+//       Read_NTC_Temperature_Value_Handler();
+//       Smg_Display_Temp_Degree_Handler();
+//       HAL_Delay(100);
+//
+//    }
 
 
     tpd_t.read_key_value=KEY_Scan();
     if(tpd_t.read_key_value!=0){
         vTaskSuspend(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
        // printf("vTaskSuspend is success \r\n");
-
+       }
      
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
@@ -271,7 +271,7 @@ void KEY_Task(void* parameter)
      if(tpd_t.run_process_tag==8){
       vTaskResume(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
      }
-    }
+ 
     vTaskDelay(1);/* ��ʱ20��tick */
   }
 }

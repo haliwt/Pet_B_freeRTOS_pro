@@ -11,10 +11,11 @@
 
 #define FAN_LED_OFF()				    HAL_GPIO_WritePin(FAN_LED_GPIO_Port, FAN_LED_Pin, GPIO_PIN_SET)
 #define FAN_LED_ON()					HAL_GPIO_WritePin(FAN_LED_GPIO_Port, FAN_LED_Pin, GPIO_PIN_RESET)
+#define FAN_LED_Toggle()                HAL_GPIO_TogglePin(FAN_LED_GPIO_Port, FAN_LED_Pin);
 
 #define KEEP_HEAT_LED_OFF()				HAL_GPIO_WritePin(KEEP_TEMP_LED_GPIO_Port , KEEP_TEMP_LED_Pin , GPIO_PIN_SET)
 #define KEEP_HEAT_LED_ON()				HAL_GPIO_WritePin(KEEP_TEMP_LED_GPIO_Port , KEEP_TEMP_LED_Pin , GPIO_PIN_RESET)
-
+#define KEEP_HEAT_LED_Toggle()          HAL_GPIO_TogglePin(KEEP_TEMP_LED_GPIO_Port , KEEP_TEMP_LED_Pin)
 
 #define TAPE_LED_OFF()			       HAL_GPIO_WritePin(TAPE_LED_GPIO_Port, TAPE_LED_Pin , GPIO_PIN_SET)
 #define TAPE_LED_ON()			       HAL_GPIO_WritePin(TAPE_LED_GPIO_Port, TAPE_LED_Pin, GPIO_PIN_RESET)
@@ -91,6 +92,7 @@ void Key_Confirm_Handler(uint8_t selitem);
 
 
 void Led_Test_Fun(void);
+void Keep_heat_SetUp_Led_Filcker(void);
 
 
 #endif 

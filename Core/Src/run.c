@@ -41,6 +41,8 @@ void Run_InputKey_Model(uint8_t keyvalue)
 			  if(tpd_t.digital_numbers>25) tpd_t.digital_numbers=20;
 	
 			   tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
+
+            
               
 
 		}
@@ -70,6 +72,7 @@ void Run_InputKey_Model(uint8_t keyvalue)
 			  if(tpd_t.digital_numbers < 20)  tpd_t.digital_numbers=25; //scope : 0~80度=80;
 			
               tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
+             
               
 			  
 		}
@@ -122,11 +125,14 @@ void Run_BoardCommand_Handler(void)
 
 	 case KEY_FUNCTION_ITEM:
 	   if(tpd_t.keep_heat_fun_digital_numbers ==1){
+        
            Run_Keep_Heat_Setup_Digital_Numbers();
+        //   Keep_heat_SetUp_Led_Filcker();
+           
 
         }
-
-       Led_Display_Content_Fun(led_on_of_number);
+       else
+         Led_Display_Content_Fun(led_on_of_number);
        
 
      break;

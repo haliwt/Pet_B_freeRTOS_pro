@@ -16,10 +16,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     if(htim->Instance==TIM14){
        tm0++;
        tm1++;
-	 
+	   led_t.gTimer_flicker ++;
 	   if(tm1>49){ //50 *10ms =500ms
 	   	 tm1=0;
-         led_t.gTimer_flicker ++;
+         
 	     led_t.gTimer_keey_heat_flicker++;
 		 
 	   	}
