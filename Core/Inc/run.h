@@ -5,7 +5,8 @@
 
 typedef enum {
     KEY_FUNCTION_ITEM=0x01,
-	KEY_CONFIRM_ITEM=0x02
+	KEY_CONFIRM_ITEM=0x02,
+	DISPLAY_KEEP_HEAT_TEMP_VALUE
 
 
 }key_item;
@@ -57,7 +58,7 @@ typedef struct _touchpad_t{
    uint8_t temperature_rectify_value;
    uint8_t temp_degree;
    uint8_t keep_heat_temperature_value_low;
-   uint8_t display_setup_keep_heat_value;
+
    
    
    

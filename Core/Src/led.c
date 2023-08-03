@@ -270,7 +270,7 @@ void Led_Display_Content_Fun(uint8_t selitem)
 	
       //KEEP HEAT Display of LED 
        if( tpd_t.gTimer_select_fun < 6){
-          
+           tpd_t.key_confirm_enable =key_confirm_enable;
            if(tpd_t.keep_heat_fun_digital_numbers ==0){
                led_t.gTimer_keey_heat_flicker=0;
                tpd_t.key_confirm_enable =key_confirm_enable;

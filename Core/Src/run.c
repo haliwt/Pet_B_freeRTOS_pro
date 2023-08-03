@@ -47,7 +47,7 @@ void Run_InputKey_Model(uint8_t keyvalue)
 
 		}
 		else{
-
+         
 	     tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
 	     if(led_on_of_number == KEEP_HEAT_LED)led_on_of_number =0;
 	     led_on_of_number++;
@@ -85,7 +85,8 @@ void Run_InputKey_Model(uint8_t keyvalue)
                  
                     if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
                       
-                          tpd_t.display_setup_keep_heat_value =1;
+                        
+                          tpd_t.run_process_tag= DISPLAY_KEEP_HEAT_TEMP_VALUE;
                           tpd_t.gTimer_display =0;
       
 
@@ -102,13 +103,15 @@ void Run_InputKey_Model(uint8_t keyvalue)
                tpd_t.key_confirm_enable =key_confirm_disable;
               if(tpd_t.keep_heat_fun_digital_numbers==1){
                 tpd_t.confirm_key_select_item_keep_heat = keep_heat_enable; 
-    
+                if(tpd_t.digital_numbers ==0)tpd_t.digital_numbers=20;
+                
     			tpd_t.keep_heat_fun_digital_numbers=0;
                 KEEP_HEAT_LED_ON();
                 ADD_DEC_LED_OFF();
                 KEY_FUN_CONFIRM_LED_SetLow();
                 RELAY_D_SetHigh();
-    			tpd_t.run_process_tag= KEY_NULL ;//KEY_CONFIRM_ITEM;
+    			tpd_t.run_process_tag= DISPLAY_KEEP_HEAT_TEMP_VALUE ;//KEY_CONFIRM_ITEM;
+    			tpd_t.gTimer_display=0;
     			
                 
             }
@@ -157,6 +160,27 @@ void Run_BoardCommand_Handler(void)
 
 	 break;
 
+     case DISPLAY_KEEP_HEAT_TEMP_VALUE:
+
+        if(tpd_t.gTimer_display < 3 &&  tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+           
+            
+        
+            Run_Display_Keep_Heat_Temperature_Vaule();
+      
+        }
+        else{
+
+            tpd_t.run_process_tag= KEY_NULL ;
+
+        }
+
+
+
+  
+
+     break;
+
 	
      }
      
@@ -201,19 +225,7 @@ void Run_BoardCommand_Handler(void)
 ***************************************************************************/
 void Run_Display_Handler(void)
 {
-    if(tpd_t.display_setup_keep_heat_value==1){
-        if(tpd_t.gTimer_display < 4 &&  tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
-           
-
-           tpd_t.display_setup_keep_heat_value=0;
-        Run_Display_Keep_Heat_Temperature_Vaule();
-      
-        }
-
-
-
-    }
-    else{
+    
 	if(tpd_t.gTimer_read_adc >59 || tpd_t.power_on_times < 50){
 	  tpd_t.gTimer_read_adc =0;
       tpd_t.power_on_times++;
@@ -228,7 +240,7 @@ void Run_Display_Handler(void)
 
       Smg_Display_Temp_Degree_Handler();
 
-     }
+     
 
     
         
@@ -252,23 +264,7 @@ void Run_Display_Handler(void)
 
        }
     }
- //   else{
 
-//       if(tpd_t.temp_degree < 20){ //open on 
-//       
-//            KEEP_HEAT_LED_ON();
-//            RELAY_D_SetHigh();
-//
-//
-//      }
-//      else if(tpd_t.temp_degree >25){
-//
-//           KEEP_HEAT_LED_OFF();
-//           RELAY_D_SetLow();
-//
-//
-//      }
-       
 
 
  }

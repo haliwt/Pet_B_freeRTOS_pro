@@ -22,7 +22,7 @@ uint8_t KEY_Scan(void)
     {
         key_t.read &= ~0x01; // 0xff & 0xfe =  0xFE
     }
-    else if(CONFIRM_KEY_VALUE()==KEY_DOWN )
+    if(CONFIRM_KEY_VALUE()==KEY_DOWN )
 	{
 		  key_t.read &= ~0x02; // 0xFf & 0xfB =  0xFB
 	}
@@ -49,7 +49,7 @@ uint8_t KEY_Scan(void)
 			if(key_t.read == key_t.buffer) // adjust key be down ->continunce be pressed key
 			{
 
-			 if(++key_t.on_time>20 ){
+			 if(++key_t.on_time>10 ){ //
 
 					key_t.value = key_t.buffer^_KEY_ALL_OFF; // key.value = 0xFE ^ 0xFF = 0x01
 					key_t.on_time = 0;                        //key .value = 0xEF ^ 0XFF = 0X10
@@ -81,7 +81,7 @@ uint8_t KEY_Scan(void)
 			}
 			else if(key_t.read == _KEY_ALL_OFF)  // loose hand 
 				{
-					if(++key_t.off_time>2) //8 //30 don't holding key dithering
+					if(++key_t.off_time>1) //8 //30 don't holding key dithering
 					{
 						key_t.value = key_t.buffer^_KEY_ALL_OFF; // key.value = 0x1E ^ 0x1f = 0x01
 						
@@ -104,7 +104,7 @@ uint8_t KEY_Scan(void)
 		{
 			if(key_t.read == _KEY_ALL_OFF)
 			{
-				if(++key_t.off_time>2)//50 //100
+				if(++key_t.off_time>1)//50 //100
 				{
 					key_t.state   = start;
                    

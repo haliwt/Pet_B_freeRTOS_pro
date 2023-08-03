@@ -35,6 +35,7 @@ void I2C_SDA_OUT(void);
 void I2C_SDA_IN(void);//ÅäÖÃ³ÉÊä³ö
 void Smg_Display_Digital_Numbers_Changed(uint8_t numbers);
 void Run_Display_Keep_Temperature_Vaule(void);
+void Run_Display_Keep_Heat_Temperature_Vaule(void);
 
 
 #endif 
