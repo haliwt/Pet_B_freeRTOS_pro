@@ -77,8 +77,21 @@ void Run_InputKey_Model(uint8_t keyvalue)
 			  
 		}
 		else{
-                if(tpd_t.key_confirm_enable ==key_confirm_enable)
+               if(tpd_t.key_confirm_enable ==key_confirm_enable){
 		            tpd_t.run_process_tag= KEY_CONFIRM_ITEM;
+
+                }
+               else{ //display setup keep heat temperature value 
+                 
+                    if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+                      
+                          tpd_t.display_setup_keep_heat_value =1;
+                          tpd_t.gTimer_display =0;
+      
+
+                    }
+
+               }
            }
 	
 		break;
@@ -188,44 +201,39 @@ void Run_BoardCommand_Handler(void)
 ***************************************************************************/
 void Run_Display_Handler(void)
 {
+    if(tpd_t.display_setup_keep_heat_value==1){
+        if(tpd_t.gTimer_display < 4 &&  tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
+           
 
-  
-	if(tpd_t.gTimer_read_adc >59 || tpd_t.power_on_times < 50){
-	  tpd_t.gTimer_read_adc =0;
-      if(tpd_t.power_on_times < 50){
-           Read_NTC_Temperature_Power_On();
-      }
-	  else	
-	      Read_NTC_Temperature_Value_Handler();
-    }
-	
-	if(tpd_t.gTimer_display > 3 && tpd_t.gTimer_display < 11){
-      //tpd_t.gTimer_display=0; 
-	  tpd_t.power_on_times++;
-        
-      Smg_Display_Temp_Degree_Handler();
-        
-    }
-    else if(tpd_t.gTimer_display < 4 &&  tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
-
-     
+           tpd_t.display_setup_keep_heat_value=0;
         Run_Display_Keep_Heat_Temperature_Vaule();
       
-      
+        }
+
+
 
     }
     else{
+	if(tpd_t.gTimer_read_adc >59 || tpd_t.power_on_times < 50){
+	  tpd_t.gTimer_read_adc =0;
+      tpd_t.power_on_times++;
+      if(tpd_t.power_on_times < 50){
+           Read_NTC_Temperature_Power_On();
+      }
+	  else{	
+	      Read_NTC_Temperature_Value_Handler();
+          
+       }
+     }
 
-     if(tpd_t.confirm_key_select_item_keep_heat == confirm_disable){
-
-        tpd_t.gTimer_display=4; 
+      Smg_Display_Temp_Degree_Handler();
 
      }
-     else
-      tpd_t.gTimer_display=0; 
 
+    
+        
+    
 
-    }
 
     if(tpd_t.confirm_key_select_item_keep_heat == keep_heat_enable){
         if(tpd_t.digital_numbers > tpd_t.temperature_value  || tpd_t.temperature_value <20){  //open on

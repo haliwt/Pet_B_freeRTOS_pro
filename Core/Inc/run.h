@@ -57,6 +57,7 @@ typedef struct _touchpad_t{
    uint8_t temperature_rectify_value;
    uint8_t temp_degree;
    uint8_t keep_heat_temperature_value_low;
+   uint8_t display_setup_keep_heat_value;
    
    
    

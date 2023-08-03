@@ -222,7 +222,7 @@ void Led_Task(void* parameter)
   while (1)
   {
 	
-	  Run_Display_Handler();
+	Run_Display_Handler();
     vTaskDelay(1000);   /* ÑÓÊ±500¸ötick */
   }
 }
@@ -236,18 +236,18 @@ void Led_Task(void* parameter)
 void KEY_Task(void* parameter)
 {	
 
- static uint8_t power_on_first;
+  uint8_t power_on_first;
  
   while (1)
   {
    
-//    if(power_on_first==0){
-//       power_on_first ++;
-//       Read_NTC_Temperature_Value_Handler();
-//       Smg_Display_Temp_Degree_Handler();
-//       HAL_Delay(100);
-//
-//    }
+    if(power_on_first==0){
+       power_on_first ++;
+       Read_NTC_Temperature_Value_Handler();
+       Smg_Display_Temp_Degree_Handler();
+       HAL_Delay(100);
+
+    }
 
 
     tpd_t.read_key_value=KEY_Scan();
