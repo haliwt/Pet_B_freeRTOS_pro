@@ -190,7 +190,7 @@ void AppTaskCreate(void)
   /* 创建KEY_Task任务 */
   xReturn = xTaskCreate((TaskFunction_t )KEY_Task,  /* 任务入口函数 */
                         (const char*    )"KEY_Task",/* 任务名字 */
-                        (uint16_t       )KEY_STK_SIZE,  /* 任务栈大小 */
+                        (uint16_t       )128,  /* 任务栈大小 */
                         (void*          )NULL,/* 任务入口函数参数 */
                         (UBaseType_t    )3, /* 任务的优先级 */
                         (TaskHandle_t*  )&KEY_Task_Handle);/* 任务控制块指针 */ 
@@ -200,7 +200,7 @@ void AppTaskCreate(void)
   /* 创建Test_Task任务 */
   xReturn = xTaskCreate((TaskFunction_t )Led_Task, /* 任务入口函数 */
                         (const char*    )"Led_Task",/* 任务名字 */
-                        (uint16_t       )LED0_STK_SIZE,    /* 任务栈大小 */
+                        (uint16_t       )64,    /* 任务栈大小 */
                         (void*          )NULL,	/* 任务入口函数参数 */
                         (UBaseType_t    )2,	    /* 任务的优先级 */
                         (TaskHandle_t*  )&Led_Task_Handle);/* 任务控制块指针 */
@@ -223,7 +223,7 @@ void Led_Task(void* parameter)
   {
 	
 	Run_Display_Handler();
-    vTaskDelay(1000);   /* 延时500个tick */
+    vTaskDelay(3000);   /* 延时500个tick */
   }
 }
 

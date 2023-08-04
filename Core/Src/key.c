@@ -18,14 +18,15 @@ uint8_t KEY_Scan(void)
   key_t.read = _KEY_ALL_OFF; //0xFF 
   
   
-    if(FUN_KEY_VALUE()==KEY_DOWN )// high level
-    {
-        key_t.read &= ~0x01; // 0xff & 0xfe =  0xFE
-    }
+   
     if(CONFIRM_KEY_VALUE()==KEY_DOWN )
 	{
 		  key_t.read &= ~0x02; // 0xFf & 0xfB =  0xFB
 	}
+    else  if(FUN_KEY_VALUE()==KEY_DOWN )// high level
+    {
+        key_t.read &= ~0x01; // 0xff & 0xfe =  0xFE
+    }
    
     
    
