@@ -272,7 +272,7 @@ void KEY_Task(void* parameter)
       vTaskResume(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
      }
  
-    vTaskDelay(1);/* ��ʱ20��tick */
+    vTaskDelay(5);/* ��ʱ20��tick */
   }
 }
 
