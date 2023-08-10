@@ -142,8 +142,8 @@ void Run_BoardCommand_Handler(void)
 	 case KEY_FUNCTION_ITEM:
 	   if(tpd_t.keep_heat_fun_digital_numbers ==1){
         
-           Run_Keep_Heat_Setup_Digital_Numbers();
-        //   Keep_heat_SetUp_Led_Filcker();
+          Run_Keep_Heat_Setup_Digital_Numbers();
+          Keep_heat_SetUp_Led_Filcker();
            
 
         }
@@ -194,6 +194,7 @@ void Run_BoardCommand_Handler(void)
               ADD_DEC_LED_OFF();
               KEEP_HEAT_LED_ON();
               RELAY_D_SetHigh();
+              tpd_t.run_process_tag= KEY_NULL ;//KEY_CONFIRM_ITEM;
 
 
         }
@@ -201,11 +202,11 @@ void Run_BoardCommand_Handler(void)
             ADD_DEC_LED_OFF();
             KEEP_HEAT_LED_OFF();
             RELAY_D_SetLow();
-
+            tpd_t.run_process_tag= KEY_NULL ;//KEY_CONFIRM_ITEM;
            
 
         }
-    	tpd_t.run_process_tag= KEY_NULL ;//KEY_CONFIRM_ITEM;
+    	
 
 
     }
