@@ -236,7 +236,7 @@ void Led_Task(void* parameter)
 void KEY_Task(void* parameter)
 {	
 
-  uint8_t power_on_first;
+  static uint8_t power_on_first;
  
   while (1)
   {
@@ -254,7 +254,7 @@ void KEY_Task(void* parameter)
     if(tpd_t.read_key_value!=0){
         vTaskSuspend(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
        // printf("vTaskSuspend is success \r\n");
-       }
+    }
      
     Run_InputKey_Model(tpd_t.read_key_value);
     Run_BoardCommand_Handler();
@@ -272,7 +272,7 @@ void KEY_Task(void* parameter)
       vTaskResume(Led_Task_Handle);/* »Ö¸´LEDÈÎÎñ£¡ */
      }
  
-    vTaskDelay(5);/* ��ʱ20��tick */
+    vTaskDelay(10);//(5)/* ��ʱ20��tick */
   }
 }
 
