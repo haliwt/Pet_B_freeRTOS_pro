@@ -35,17 +35,14 @@ void Run_InputKey_Model(uint8_t keyvalue)
               tpd_t.gTimer_keep_heat_fun=0;
                tpd_t.gTimer_select_fun=0;
               tpd_t.gTimer_exit_keey_heat_fun=0;
-              if(tpd_t.digital_numbers==0)tpd_t.digital_numbers=20;
+              if(tpd_t.digital_numbers==0)tpd_t.digital_numbers=16;
               else
 			    tpd_t.digital_numbers++; //scope : 0~40度
-			  if(tpd_t.digital_numbers>25) tpd_t.digital_numbers=20;
+			  if(tpd_t.digital_numbers>30) tpd_t.digital_numbers=30;
 	
 			   tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
 
-            
-              
-
-		}
+        }
 		else{
          
 	     tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
@@ -66,10 +63,10 @@ void Run_InputKey_Model(uint8_t keyvalue)
              tpd_t.gTimer_select_fun=0;
               tpd_t.gTimer_exit_keey_heat_fun=0;
               
-			  if(tpd_t.digital_numbers ==0)tpd_t.digital_numbers=20;
+			  if(tpd_t.digital_numbers ==0)tpd_t.digital_numbers=30;
               else
                 tpd_t.digital_numbers--; //scope : 0~40度--; //scope : 0 ~40 degree
-			  if(tpd_t.digital_numbers < 20)  tpd_t.digital_numbers=25; //scope : 0~80度=80;
+			  if(tpd_t.digital_numbers < 16)tpd_t.digital_numbers=16; //scope : 0~80度=80;
 			
               tpd_t.run_process_tag= KEY_FUNCTION_ITEM;
              

@@ -29,9 +29,6 @@ static uint16_t Get_Adc_Hex_Average(uint8_t times);
 
 ADC_HandleTypeDef hadc1;
 
-
-
-
 /* ADC1 init function */
 void MX_ADC1_Init(void)
 {

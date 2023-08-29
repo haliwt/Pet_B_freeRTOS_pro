@@ -57,57 +57,30 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define SCL_Pin                         GPIO_PIN_7
-#define SCL_GPIO_Port                   GPIOB
-#define SDA_Pin                         GPIO_PIN_9
-#define SDA_GPIO_Port                   GPIOB
-
-
-//function led
-
-#define FAN_LED_Pin                         GPIO_PIN_4
-#define FAN_LED_GPIO_Port                   GPIOA
-
-#define TAPE_LED_Pin                        GPIO_PIN_5
-#define TAPE_LED_GPIO_Port                  GPIOA
-
-#define KILL_LED_Pin                        GPIO_PIN_6
-#define KILL_LED_GPIO_Port                  GPIOA
-
-#define KEEP_TEMP_LED_Pin                    GPIO_PIN_7
-#define KEEP_TEMP_LED_GPIO_Port              GPIOA
-
-//function of keep temperature led 
-#define ADD_DEC_LED_Pin                     GPIO_PIN_11
-#define ADD_DEC_LED_GPIO_Port               GPIOA
-
-//output relay 
-#define RELAY_C_Pin                         GPIO_PIN_12
-#define RELAY_C_GPIO_Port                   GPIOA
-
-#define RELAY_D_Pin                         GPIO_PIN_15
-#define RELAY_D_GPIO_Port                   GPIOC
-
-#define RELAY_A_Pin                         GPIO_PIN_2
-#define RELAY_A_GPIO_Port                   GPIOA
-
-#define RELAY_B_Pin                         GPIO_PIN_3
-#define RELAY_B_GPIO_Port                   GPIOA
-
-
-//input key 
-#define INPUT_KEY_CONFIRM_Pin               GPIO_PIN_3
-#define INPUT_KEY_CONFIRM_GPIO_Port         GPIOB
-
-#define INPUT_KEY_FUN_Pin                   GPIO_PIN_0
-#define INPUT_KEY_FUN_GPIO_Port             GPIOB
-//input key of led 
-#define FUN_CONFIRM_LED_Pin                     GPIO_PIN_1
-#define FUN_CONFIRM_LED_GPIO_Port               GPIOA
-
-
-
-
+#define SCL_Pin GPIO_PIN_7
+#define SCL_GPIO_Port GPIOB
+#define SDA_Pin GPIO_PIN_9
+#define SDA_GPIO_Port GPIOB
+#define RELAY_D_Pin GPIO_PIN_15
+#define RELAY_D_GPIO_Port GPIOC
+#define FUN_CONFIRM_Pin GPIO_PIN_1
+#define FUN_CONFIRM_GPIO_Port GPIOA
+#define REALY_A_Pin GPIO_PIN_2
+#define REALY_A_GPIO_Port GPIOA
+#define RELAY_B_Pin GPIO_PIN_3
+#define RELAY_B_GPIO_Port GPIOA
+#define FAN_LED_Pin GPIO_PIN_4
+#define FAN_LED_GPIO_Port GPIOA
+#define TAPE_LED_Pin GPIO_PIN_5
+#define TAPE_LED_GPIO_Port GPIOA
+#define KILL_LED_Pin GPIO_PIN_6
+#define KILL_LED_GPIO_Port GPIOA
+#define KEE_TEMP_LED_Pin GPIO_PIN_7
+#define KEE_TEMP_LED_GPIO_Port GPIOA
+#define ADD_DEC_LED_Pin GPIO_PIN_11
+#define ADD_DEC_LED_GPIO_Port GPIOA
+#define RELAY_C_Pin GPIO_PIN_12
+#define RELAY_C_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

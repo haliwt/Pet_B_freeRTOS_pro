@@ -58,14 +58,7 @@
 
 #define configUSE_PREEMPTION                     1
 #define configSUPPORT_STATIC_ALLOCATION          0
-/***************************************************************************************************************/
-/*                                FreeRTOS与内存申请有关配置选项                                                */
-/***************************************************************************************************************/
-#define configSUPPORT_DYNAMIC_ALLOCATION        1                       //支持动态内存申请
-//#define configTOTAL_HEAP_SIZE					((size_t)(20*1024))     //系统所有总的堆大小
-
-/***************************************************************************************************************/
-//#define configSUPPORT_DYNAMIC_ALLOCATION         1
+#define configSUPPORT_DYNAMIC_ALLOCATION         1
 #define configUSE_IDLE_HOOK                      0
 #define configUSE_TICK_HOOK                      0
 #define configCPU_CLOCK_HZ                       ( SystemCoreClock )

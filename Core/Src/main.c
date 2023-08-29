@@ -149,18 +149,7 @@ int main(void)
   MX_FREERTOS_Init();
 
   /* Start scheduler */
-  //创建开始任务
-   xTaskCreate((TaskFunction_t )AppTaskCreate,            //任务函数
-                (const char*    )"AppTaskCreate",          //任务名称
-                (uint16_t       )START_STK_SIZE,        //任务堆栈大小
-                (void*          )NULL,                  //传递给任务函数的参数
-                (UBaseType_t    )START_TASK_PRIO,       //任务优先级
-                (TaskHandle_t*  )&AppTaskCreate_Handle);   //任务句柄   
-  
-  
-  
-  
-  osKernelStart();//开启任务调度
+  osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
@@ -173,110 +162,6 @@ int main(void)
   }
   /* USER CODE END 3 */
 }
-
-/***********************************************************************
-  * @ 函数名  ： AppTaskCreate
-  * @ 功能说明： 为了方便管理，所有的任务创建函数都放在这个函数里面
-  * @ 参数    ： 无  
-  * @ 返回值  ： 无
-  **********************************************************************/
-void AppTaskCreate(void)
-{
-  BaseType_t xReturn = pdPASS;/* 定义一个创建信息返回值，默认为pdPASS */
-  
-  taskENTER_CRITICAL();           //进入临界区
-  //  if(pdPASS == xReturn)
-//    printf("创建Test_Task任务成功!\r\n");
-  /* 创建KEY_Task任务 */
-  xReturn = xTaskCreate((TaskFunction_t )KEY_Task,  /* 任务入口函数 */
-                        (const char*    )"KEY_Task",/* 任务名字 */
-                        (uint16_t       )128,  /* 任务栈大小 */
-                        (void*          )NULL,/* 任务入口函数参数 */
-                        (UBaseType_t    )3, /* 任务的优先级 */
-                        (TaskHandle_t*  )&KEY_Task_Handle);/* 任务控制块指针 */ 
-//  if(pdPASS == xReturn)
-//    printf("创建KEY_Task任务成功!\r\n");
-                        
-  /* 创建Test_Task任务 */
-  xReturn = xTaskCreate((TaskFunction_t )Led_Task, /* 任务入口函数 */
-                        (const char*    )"Led_Task",/* 任务名字 */
-                        (uint16_t       )64,    /* 任务栈大小 */
-                        (void*          )NULL,	/* 任务入口函数参数 */
-                        (UBaseType_t    )2,	    /* 任务的优先级 */
-                        (TaskHandle_t*  )&Led_Task_Handle);/* 任务控制块指针 */
-  
-  vTaskDelete(AppTaskCreate_Handle); //删除AppTaskCreate任务
-  
-  taskEXIT_CRITICAL();            //退出临界区
-}
-
-/**********************************************************************
-  * @ 函数名  ： Test_Task
-  * @ 功能说明： Test_Task任务主体
-  * @ 参数    ：   
-  * @ 返回值  ： 无
-  ********************************************************************/
-void Led_Task(void* parameter)
-{	
-  KEY_FUN_CONFIRM_LED_SetLow();
-  while (1)
-  {
-	
-	Run_Display_Handler();
-    vTaskDelay(3000);   /* 延时500个tick */
-  }
-}
-
-/**********************************************************************
-  * @ 函数名  ： Test_Task
-  * @ 功能说明： Test_Task任务主体
-  * @ 参数    ：   
-  * @ 返回值  ： 无
-  ********************************************************************/
-void KEY_Task(void* parameter)
-{	
-
-  static uint8_t power_on_first;
- 
-  while (1)
-  {
-   
-    if(power_on_first==0){
-       power_on_first ++;
-       Read_NTC_Temperature_Value_Handler();
-       Smg_Display_Temp_Degree_Handler();
-       HAL_Delay(100);
-
-    }
-
-
-    tpd_t.read_key_value=KEY_Scan();
-    if(tpd_t.read_key_value!=0){
-        vTaskSuspend(Led_Task_Handle);/* 禄脰赂麓LED脠脦脦帽拢隆 */
-       // printf("vTaskSuspend is success \r\n");
-    }
-     
-    Run_InputKey_Model(tpd_t.read_key_value);
-    Run_BoardCommand_Handler();
-
-
-
-    if(tpd_t.run_process_tag==KEY_NULL){
-        tpd_t.key_confirm_enable = key_confirm_disable;
-        tpd_t.run_process_tag++;
-       // printf("vTaskResume is success \r\n");
-       vTaskResume(Led_Task_Handle);/* 禄脰赂麓LED脠脦脦帽拢隆 */
-        
-     }
-     if(tpd_t.run_process_tag==8){
-      vTaskResume(Led_Task_Handle);/* 禄脰赂麓LED脠脦脦帽拢隆 */
-     }
- 
-    vTaskDelay(10);//(5)/* 锟斤拷时20锟斤拷tick */
-  }
-}
-
-
 
 /**
   * @brief System Clock Configuration
